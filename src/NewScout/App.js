@@ -1,10 +1,8 @@
 import * as React from 'react';
 import {
   Text,
-  Button,
   View,
   FlatList,
-  StyleSheet,
   Image,
   SafeAreaView,
 } from 'react-native';
@@ -14,156 +12,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
+import styles from './styles/Base';
+import TrendingScreen from './screens/TrendingScreen';
 
 const Tab = createBottomTabNavigator();
-
-class TrendingScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {dataSource: {}};
-  }
-
-  componentDidMount() {
-
-    let articles = [
-      {
-        id: 0,
-        title: 'Singapore Flyer to reopen on July 23',
-        ts: 'about an hour ago',
-        source: 'businesstimes.com.sg',
-        count: '2',
-      },
-      {
-        id: 1,
-        title: 'Indian rupee ends at two-week high against US dollar',
-        ts: '2 hours ago',
-        source: 'livemint.com',
-        count: '2',
-      },
-      {
-        id: 2,
-        title: 'Got an old phone lying in the drawer? Just send it by post, in France',
-        ts: '2 hours ago',
-        source: 'straitstimes.com',
-        count: '2',
-      },
-      {
-        id: 3,
-        title: 'Google Assistant for KaiOS gets Google Lens-like text translation feature',
-        ts: '3 hours ago',
-        source: 'business-standard.com',
-        count: '2',
-      },
-      {
-        id: 4,
-        title: 'Gojek names former Amazon exec Severan Rault its Singapore-based chief technology officer',
-        ts: '6 hours ago',
-        source: 'straitstimes.com',
-        count: '2',
-      },
-    ];
-
-    this.setState({
-      featuredArticles: articles,
-    });
-  }
-
-  render() {
-    return (
-      <View style={{flex: 1}}>
-        <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1, backgroundColor: '#bab5b5'}}>
-          <FlatList
-            style={{flex: 1}}
-            data={this.state.featuredArticles}
-            renderItem={({item}) => (
-              <View
-                style={{
-                  flex: 1,
-                  backgroundColor: 'white',
-                  alignItems: 'stretch',
-                  borderRadius: 10,
-                  marginRight: 5,
-                  marginTop: 9,
-                  marginBottom: 3,
-                  marginLeft: 5,
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 2,
-                  },
-                  shadowOpacity: 0.25,
-                  shadowRadius: 3.84,
-                  elevation: 5,
-                }}>
-                <TouchableOpacity>
-                  <Text style={{flex: 0.25, marginLeft: 12, marginRight: 12, backgroundColor: '#d62828', fontSize: 2, borderRadius: 20}}>.</Text>
-                  <Image
-                    style={{
-                      flex: 1,
-                      backgroundColor: 'yellow',
-                      marginLeft: 5,
-                      marginRight: 5,
-                      marginTop: 15,
-                      marginBottom: 10,
-                      width: 355,
-                      height: 180,
-                      borderRadius: 10,
-                    }}
-                    source={{uri: 'https://picsum.photos/400/400'}}
-                  />
-                  <View style={{flex: 1, flexDirection: 'row'}}>
-                    <View style={{flex: 1}}>
-                      <Text
-                        style={{
-                          flex: 2,
-                          fontWeight: 'bold',
-                          fontSize: 20,
-                          marginTop: 10,
-                          marginLeft: 10,
-                        }}>
-                        {item.title}
-                      </Text>
-                      <Text
-                        style={{
-                          flex: 1,
-                          color: '#d62828',
-                          fontSize: 16,
-                          fontWeight: 'bold',
-                          marginLeft: 10,
-                        }}>
-                        {item.source}
-                      </Text>
-                      <Text
-                        style={{
-                          flex: 1,
-                          marginLeft: 10,
-                          marginBottom: 15,
-                        }}>
-                        {item.ts}
-                      </Text>
-                    </View>
-                    <Icon
-                      name={'chevron-circle-right'}
-                      size={30}
-                      color={'#d62828'}
-                      style={{
-                        flex: 0.1,
-                        alignSelf: 'center',
-                        marginLeft: 5,
-                        marginRight: 10,
-                      }}
-                    />
-                  </View>
-                </TouchableOpacity>
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </ScrollView>
-      </View>
-    );
-  }
-}
 
 class ForYouScreen extends React.Component {
   constructor(props) {
@@ -240,10 +92,10 @@ class ForYouScreen extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.flexible}>
         <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1, backgroundColor: '#bab5b5'}}>
           <FlatList
-            style={{flex: 1}}
+            style={styles.flexible}
             data={this.state.articles}
             renderItem={({item, index}) => { 
                 if(index % 2 == 0){
@@ -269,7 +121,7 @@ class ForYouScreen extends React.Component {
                     }}>
                     <TouchableOpacity>
                       <Text style={{flex: 0.25, marginLeft: 12, marginRight: 12, backgroundColor: '#d62828', fontSize: 2, borderRadius: 20}}>.</Text>
-                      <View style={{flex: 1, flexDirection: 'row'}}>
+                      <View style={styles.rowAlignedView}>
                       <Image
                         style={{
                           flex: 0.5,
@@ -283,7 +135,7 @@ class ForYouScreen extends React.Component {
                         }}
                         source={{uri: 'https://picsum.photos/200/200'}}
                       />
-                        <View style={{flex: 1}}>
+                        <View style={styles.flexible}>
                           <Text
                             style={{
                               flex: 2,
@@ -341,8 +193,8 @@ class ForYouScreen extends React.Component {
                     }}>
                     <TouchableOpacity>
                       <Text style={{flex: 0.25, marginLeft: 12, marginRight: 12, backgroundColor: '#d62828', fontSize: 2, borderRadius: 20}}>.</Text>
-                      <View style={{flex: 1, flexDirection: 'row'}}>
-                        <View style={{flex: 1}}>
+                      <View style={styles.rowAlignedView}>
+                        <View style={styles.flexible}>
                           <Text
                             style={{
                               flex: 2,
@@ -422,7 +274,7 @@ class CategoriesScreen extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.flexible}>
         <Text
           style={{
             flex: 0.05,
@@ -434,7 +286,7 @@ class CategoriesScreen extends React.Component {
           Categories
         </Text>
         <FlatList
-          style={{flex: 1}}
+          style={styles.flexible}
           data={this.state.dataSource}
           renderItem={({item}) => (
             <View
@@ -513,7 +365,7 @@ class SearchScreen extends React.Component {
   }
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.flexible}>
         <Text
           style={{
             flex: 0.05,
@@ -525,7 +377,7 @@ class SearchScreen extends React.Component {
           Settings
         </Text>
         <FlatList
-          style={{flex: 1}}
+          style={styles.flexible}
           data={this.state.options}
           renderItem={({item}) => (
             <View
@@ -540,7 +392,7 @@ class SearchScreen extends React.Component {
                 marginLeft: 5,
               }}>
               <TouchableOpacity>
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={styles.rowAlignedView}>
                   <Icon
                     name={item.icon}
                     size={50}
@@ -556,7 +408,7 @@ class SearchScreen extends React.Component {
                       borderRadius: 70,
                     }}
                   />
-                  <View style={{flex: 1}}>
+                  <View style={styles.flexible}>
                     <Text
                       style={{
                         flex: 2,
@@ -638,7 +490,7 @@ class ArticleDetailsScreen extends React.Component {
         {this.state.data.map &&
           this.state.data.map((item, i) => {
             return (
-              <SafeAreaView style={{flex: 1}}>
+              <SafeAreaView style={styles.flexible}>
               <View style={styles.slide1}>
                 <Image
                       style={{
@@ -767,7 +619,7 @@ class ArticleDetailsScreen extends React.Component {
 }
 function HomeScreen({navigation}) {
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.flexible}>
       <NavigationContainer independent={true}>
         <Tab.Navigator
           screenOptions={({route}) => ({
@@ -840,19 +692,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  imageThumbnail: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  slide1: {
-    flex: 1,
-    marginTop: 10,
-  },
-  wrapper: {},    
-});
