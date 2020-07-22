@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, ScrollView, FlatList, TouchableOpacity, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import TimeAgo from 'react-native-timeago';
 import styles from '../styles/TrendingScreen';
 
 class TrendingScreen extends React.Component {
@@ -88,7 +88,7 @@ class TrendingScreen extends React.Component {
                       <View style={styles.flexible}>
                         <Text style={styles.boldTitle}>{item.articles[0].title}</Text>
                         <Text style={styles.source}>{item.articles[0].source}</Text>
-                        <Text style={styles.ts}>{item.articles[0].published_on}</Text>
+                        <Text style={styles.ts}><TimeAgo time={item.articles[0].published_on} /></Text>
                       </View>
                       <Icon
                         name={'chevron-circle-right'}
