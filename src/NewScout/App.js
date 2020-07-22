@@ -13,6 +13,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
+import Swiper from 'react-native-swiper';
 
 const Tab = createBottomTabNavigator();
 
@@ -600,6 +601,52 @@ class SearchScreen extends React.Component {
   }
 }
 
+class ArticleDetailsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: ['Test 1', 'Test 2', 'Test 3'],
+    };
+  }
+
+  loadItems() {
+    this.setState({
+      data: [
+        'Test 1',
+        'Test 2',
+        'Test 3',
+        'Test 4',
+        'Test 5',
+        'Test 6',
+        'Test 7',
+      ],
+    });
+  }
+  render() {
+    return (
+      <Swiper
+        loop={false}
+        style={styles.wrapper}
+        horizontal={false}
+        showsPagination={false}
+        onIndexChanged={index => {
+          if (index === 1) {
+            console.log('paginating');
+            this.loadItems();
+          }
+        }}>
+        {this.state.data.map &&
+          this.state.data.map((item, i) => {
+            return (
+              <View style={styles.slide1}>
+                <Text style={styles.text}>Hello Swiper: {item}</Text>
+              </View>
+            );
+          })}
+      </Swiper>
+    );
+  }
+}
 function HomeScreen({navigation}) {
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -661,6 +708,15 @@ export default function App() {
           }}
           component={ForYouScreen}
         />
+        <Drawer.Screen
+          name="Article Details"
+          options={{
+            drawerIcon: config => (
+              <Icon name="circle" size={20} color="#d62828" />
+            ),
+          }}
+          component={ArticleDetailsScreen}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -672,4 +728,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+  wrapper: {},    
 });
