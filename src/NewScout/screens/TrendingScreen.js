@@ -9,6 +9,18 @@ class TrendingScreen extends React.Component {
       super(props);
       this.state = {dataSource: {}};
     }
+    callAPI = () => {
+      return fetch('http://www.newscout.in/api/v1/trending/?domain=newscout&format=json')
+        .then(response => response.json())
+        .then(json => {
+          this.setState({
+            featuredArticles: json.body.results,
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
   
     componentDidMount() {
       let articles = [
@@ -49,9 +61,10 @@ class TrendingScreen extends React.Component {
         },
       ];
   
-      this.setState({
-        featuredArticles: articles,
-      });
+      this.callAPI();
+      // this.setState({
+      //   featuredArticles: articles,
+      // });
     }
   
     render() {
@@ -69,13 +82,13 @@ class TrendingScreen extends React.Component {
                     <Text style={styles.cardUnitColoredStrip}>.</Text>
                     <Image
                       style={styles.cardUnitImage}
-                      source={{uri: 'https://picsum.photos/400/400'}}
+                      source={{uri: item.articles[0].cover_image}}
                     />
                     <View style={styles.rowAlignedView}>
                       <View style={styles.flexible}>
-                        <Text style={styles.boldTitle}>{item.title}</Text>
-                        <Text style={styles.source}>{item.source}</Text>
-                        <Text style={styles.ts}>{item.ts}</Text>
+                        <Text style={styles.boldTitle}>{item.articles[0].title}</Text>
+                        <Text style={styles.source}>{item.articles[0].source}</Text>
+                        <Text style={styles.ts}>{item.articles[0].published_on}</Text>
                       </View>
                       <Icon
                         name={'chevron-circle-right'}
