@@ -46,6 +46,13 @@ const styles = StyleSheet.create({
       marginLeft: 10,
       marginBottom: 15,
     },
+    screenHeading: {
+      flex: 0.05,
+      marginTop: 10,
+      marginLeft: 5,
+      fontSize: 25,
+      fontWeight: 'bold',
+    }
   });
 
 export default styles;
