@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {View, Text, ScrollView, FlatList} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { FloatingAction } from "react-native-floating-action";
+
+import * as Colors from '../styles/Colors';
 import styles from '../styles/Base';
+
 import LeftImageAlignedItem from '../components/LeftImageAlignedItem';
 import RightImageAlignedItem from '../components/RightImageAlignedItem';
 
@@ -8,6 +13,7 @@ class ForYouScreen extends React.Component {
     constructor(props) {
       super(props);
       this.state = {dataSource: {}};
+      this.scrollView = React.createRef()
     }
   
     callAPI = () => {
@@ -27,10 +33,28 @@ class ForYouScreen extends React.Component {
       this.callAPI();
     }
   
+    scrollToTop = () => {
+      this.scrollView.scrollTo({y: 0});
+    }
+
     render() {
+      const actions = [
+        {
+          text: "Top",
+          color: Colors.basePrimaryColor,
+          icon: <Icon name={'arrow-up'} color={Colors.iconColor}/>,
+          name: "bt_accessibility",
+          position: 0
+        },
+      ];
+
       return (
         <View style={styles.flexible}>
-          <ScrollView showsVerticalScrollIndicator={false} style={styles.flexible}>
+          <ScrollView 
+              showsVerticalScrollIndicator={false} 
+              style={styles.flexible}
+              ref={ref => (this.scrollView = ref)}
+          >
             <Text style={styles.screenHeading}>
               For You
             </Text>
@@ -62,6 +86,12 @@ class ForYouScreen extends React.Component {
               keyExtractor={(item, index) => index.toString()}
             />
           </ScrollView>
+          <FloatingAction
+              color={Colors.basePrimaryColor}
+              floatingIcon={<Icon name={'arrow-up'} size={25} color={Colors.iconColor}/>}
+              showBackground={false}
+              onPressMain={this.scrollToTop}
+          />
         </View>
       );
     }
