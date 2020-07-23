@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {View, ScrollView, FlatList, TouchableOpacity, Text, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import TimeAgo from 'react-native-timeago';
-import styles from '../styles/TrendingScreen';
+import {View, ScrollView, FlatList} from 'react-native';
+
+import styles from '../styles/Base';
 
 import FeaturedItem from '../components/FeaturedItem';
 

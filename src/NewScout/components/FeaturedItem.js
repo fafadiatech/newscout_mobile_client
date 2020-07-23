@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
 import TimeAgo from 'react-native-timeago';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from '../styles/TrendingScreen';
+import styles from '../styles/Base';
 
 class FeaturedItem extends React.Component {
     render(){
