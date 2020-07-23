@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import TimeAgo from 'react-native-timeago';
 import styles from '../styles/TrendingScreen';
 
+import FeaturedItem from '../components/FeaturedItem';
+
 class TrendingScreen extends React.Component {
     constructor(props) {
       super(props);
@@ -77,28 +79,12 @@ class TrendingScreen extends React.Component {
               style={styles.flexible}
               data={this.state.featuredArticles}
               renderItem={({item}) => (
-                <View style={styles.cardUnitView}>
-                  <TouchableOpacity>
-                    <Text style={styles.cardUnitColoredStrip}>.</Text>
-                    <Image
-                      style={styles.cardUnitImage}
-                      source={{uri: item.articles[0].cover_image}}
-                    />
-                    <View style={styles.rowAlignedView}>
-                      <View style={styles.flexible}>
-                        <Text style={styles.boldTitle}>{item.articles[0].title}</Text>
-                        <Text style={styles.source}>{item.articles[0].source}</Text>
-                        <Text style={styles.ts}><TimeAgo time={item.articles[0].published_on} /></Text>
-                      </View>
-                      <Icon
-                        name={'chevron-circle-right'}
-                        size={30}
-                        color={'#d62828'}
-                        style={styles.cardUnitNextIcon}
-                      />
-                    </View>
-                  </TouchableOpacity>
-                </View>
+                <FeaturedItem 
+                  coverImage={item.articles[0].cover_image}
+                  title={item.articles[0].title}
+                  source={item.articles[0].source}
+                  ts={item.articles[0].published_on}
+                />
               )}
               keyExtractor={(item, index) => index.toString()}
             />

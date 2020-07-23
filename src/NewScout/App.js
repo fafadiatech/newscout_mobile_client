@@ -6,6 +6,7 @@ import {
   Image,
   SafeAreaView,
 } from 'react-native';
+import TimeAgo from 'react-native-timeago';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -22,6 +23,20 @@ class ForYouScreen extends React.Component {
     super(props);
     this.state = {dataSource: {}};
   }
+
+  callAPI = () => {
+    return fetch('http://www.newscout.in/api/v1/article/search/?domain=newscout&category=Tech&format=json&rows=100')
+      .then(response => response.json())
+      .then(json => {
+        console.log(json.body.results[1]);
+        this.setState({
+          articles: json.body.results,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   componentDidMount() {
 
@@ -85,9 +100,10 @@ class ForYouScreen extends React.Component {
 
     ];
 
-    this.setState({
-      articles: articles,
-    });
+    // this.setState({
+    //   articles: articles,
+    // });
+    this.callAPI();
   }
 
   render() {
@@ -133,7 +149,7 @@ class ForYouScreen extends React.Component {
                           height: 120,
                           borderRadius: 10,
                         }}
-                        source={{uri: 'https://picsum.photos/200/200'}}
+                        source={{uri: item.cover_image}}
                       />
                         <View style={styles.flexible}>
                           <Text
@@ -163,7 +179,7 @@ class ForYouScreen extends React.Component {
                               marginLeft: 10,
                               marginBottom: 15,
                             }}>
-                            {item.ts}
+                            <TimeAgo time={item.published_on} />
                           </Text>
                         </View>
                       </View>
@@ -222,7 +238,7 @@ class ForYouScreen extends React.Component {
                               marginLeft: 10,
                               marginBottom: 15,
                             }}>
-                            {item.ts}
+                            <TimeAgo time={item.published_on} />
                           </Text>
                         </View>
                         <Image
@@ -236,7 +252,7 @@ class ForYouScreen extends React.Component {
                           height: 120,
                           borderRadius: 10,
                         }}
-                        source={{uri: 'https://picsum.photos/200/200'}}
+                        source={{uri: item.cover_image}}
                       />
                       </View>
                     </TouchableOpacity>
