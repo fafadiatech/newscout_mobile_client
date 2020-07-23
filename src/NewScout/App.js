@@ -1,12 +1,9 @@
 import * as React from 'react';
 import {
-  Text,
-  View,
-  FlatList,
-  Image,
   SafeAreaView,
+  Text,
 } from 'react-native';
-
+import { createStackNavigator } from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -23,8 +20,10 @@ import ArticleDetailsScreen from './screens/ArticleDetailsScreen';
 
 
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+const Header = createStackNavigator();
 
-function HomeScreen({navigation}) {
+function AllTabs({navigation}) {
   return (
     <SafeAreaView style={styles.flexible}>
       <NavigationContainer independent={true}>
@@ -61,7 +60,39 @@ function HomeScreen({navigation}) {
   );
 }
 
-const Drawer = createDrawerNavigator();
+
+function HomeScreen({navigation}) {
+  return (
+    <Header.Navigator>
+      <Header.Screen
+        name="NewScout"
+        component={AllTabs}
+        options={{
+          title: 'NewScout',
+          headerStyle: {
+            backgroundColor: Colors.basePrimaryColor,
+          },
+          headerLeft: () => {
+            return(
+              <Icon
+                name={'bars'}
+                size={25}
+                color={'white'}
+                style={{marginLeft: 13}}
+                onPress={() => {navigation.openDrawer()}}
+              />
+            )
+          },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 20,
+            color: Colors.iconColor,
+          },
+        }}
+      />
+    </Header.Navigator>
+  );
+}
 
 export default function App() {
   return (
