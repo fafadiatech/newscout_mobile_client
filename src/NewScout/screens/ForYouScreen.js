@@ -14,7 +14,6 @@ class ForYouScreen extends React.Component {
       return fetch('http://www.newscout.in/api/v1/article/search/?domain=newscout&category=Tech&format=json&rows=100')
         .then(response => response.json())
         .then(json => {
-          console.log(json.body.results[1]);
           this.setState({
             articles: json.body.results,
           });
