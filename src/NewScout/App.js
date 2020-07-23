@@ -13,6 +13,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
+
 import styles from './styles/Base';
 import * as Colors from './styles/Colors';
 
@@ -428,7 +429,17 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator
+        initialRouteName="Home"
+        drawerContentOptions={{
+          activeTintColor: Colors.burgerMenuTintColor,
+          labelStyle: {
+            fontWeight: 'bold',
+            fontSize: 19,
+            color: Colors.basePrimaryColor
+          },
+        }}
+      >
         <Drawer.Screen
           name="Trending"
           options={{
