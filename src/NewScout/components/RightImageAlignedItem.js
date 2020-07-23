@@ -31,6 +31,7 @@ class RightImageAlignedItem extends React.Component {
               <View style={styles.rowAlignedView}>
                 <View style={styles.flexible}>
                   <Text
+                    numberOfLines={3}
                     style={{
                       flex: 2,
                       fontWeight: 'bold',

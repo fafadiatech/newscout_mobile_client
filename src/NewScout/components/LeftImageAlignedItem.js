@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
 import TimeAgo from 'react-native-timeago';
-import styles from '../styles/TrendingScreen';
+import styles from '../styles/Base';
 import * as Colors from '../styles/Colors';
 
 class LeftImageAlignedItem extends React.Component {
@@ -44,6 +44,7 @@ class LeftImageAlignedItem extends React.Component {
               />
                 <View style={styles.flexible}>
                   <Text
+                    numberOfLines={3}
                     style={{
                       flex: 2,
                       fontWeight: 'bold',
