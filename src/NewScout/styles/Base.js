@@ -5,10 +5,6 @@ const styles = StyleSheet.create({
   flexible: {
       flex: 1
     },
-    scrollView: {
-      flex: 1,
-      backgroundColor: Colors.baseBackgroundSecondaryColor
-    },
     imageThumbnail: {
       flex: 1,
       justifyContent: 'center',
@@ -50,7 +46,7 @@ const styles = StyleSheet.create({
       flex: 0.05,
       marginTop: 10,
       marginLeft: 5,
-      fontSize: 25,
+      fontSize: 27,
       fontWeight: 'bold',
     }
   });
