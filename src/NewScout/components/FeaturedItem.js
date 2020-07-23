@@ -2,16 +2,21 @@ import * as React from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
 import TimeAgo from 'react-native-timeago';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import styles from '../styles/Base';
+import componentStyles from '../styles/TrendingScreen';
+
+import * as Colors from '../styles/Colors';
+import * as DefaultIcons from '../styles/DefaultIcons';
 
 class FeaturedItem extends React.Component {
     render(){
         return(
-            <View style={styles.cardUnitView}>
+            <View style={componentStyles.cardUnitView}>
             <TouchableOpacity>
-              <Text style={styles.cardUnitColoredStrip}>.</Text>
+              <Text style={componentStyles.cardUnitColoredStrip}>.</Text>
               <Image
-                style={styles.cardUnitImage}
+                style={componentStyles.cardUnitImage}
                 source={{uri: this.props.coverImage}}
               />
               <View style={styles.rowAlignedView}>
@@ -21,10 +26,10 @@ class FeaturedItem extends React.Component {
                   <Text style={styles.ts}><TimeAgo time={this.props.ts} /></Text>
                 </View>
                 <Icon
-                  name={'chevron-circle-right'}
+                  name={DefaultIcons.defaultNextIcon}
                   size={30}
-                  color={'#d62828'}
-                  style={styles.cardUnitNextIcon}
+                  color={Colors.basePrimaryColor}
+                  style={componentStyles.cardUnitNextIcon}
                 />
               </View>
             </TouchableOpacity>

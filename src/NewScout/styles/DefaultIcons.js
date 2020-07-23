@@ -1,0 +1,1 @@
+export const defaultNextIcon = 'chevron-circle-right';
