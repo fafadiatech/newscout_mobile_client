@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
 import TimeAgo from 'react-native-timeago';
 import styles from '../styles/Base';
+import * as Colors from '../styles/Colors';
 
 class RightImageAlignedItem extends React.Component {
     render(){
@@ -26,7 +27,7 @@ class RightImageAlignedItem extends React.Component {
               elevation: 5,
             }}>
             <TouchableOpacity>
-              <Text style={{flex: 0.25, marginLeft: 12, marginRight: 12, backgroundColor: '#d62828', fontSize: 2, borderRadius: 20}}>.</Text>
+              <Text style={{flex: 0.25, marginLeft: 12, marginRight: 12, backgroundColor: Colors.basePrimaryColor, fontSize: 2, borderRadius: 20}}>.</Text>
               <View style={styles.rowAlignedView}>
                 <View style={styles.flexible}>
                   <Text
@@ -43,7 +44,7 @@ class RightImageAlignedItem extends React.Component {
                   <Text
                     style={{
                       flex: 1,
-                      color: '#d62828',
+                      color: Colors.basePrimaryColor,
                       fontSize: 16,
                       fontWeight: 'bold',
                       marginLeft: 10,

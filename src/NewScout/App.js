@@ -14,6 +14,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
 import styles from './styles/Base';
+import * as Colors from './styles/Colors';
+
 import TrendingScreen from './screens/TrendingScreen';
 import ForYouScreen from './screens/ForYouScreen';
 
@@ -60,7 +62,7 @@ class CategoriesScreen extends React.Component {
               style={{
                 flex: 1,
                 alignItems: 'stretch',
-                backgroundColor: '#d62828',
+                backgroundColor: Colors.basePrimaryColor,
                 borderRadius: 10,
                 marginRight: 5,
                 marginTop: 10,
@@ -151,7 +153,7 @@ class SearchScreen extends React.Component {
               style={{
                 flex: 1,
                 alignItems: 'stretch',
-                backgroundColor: '#d62828',
+                backgroundColor: Colors.basePrimaryColor,
                 borderRadius: 10,
                 marginRight: 5,
                 marginTop: 3,
@@ -284,7 +286,7 @@ class ArticleDetailsScreen extends React.Component {
                     <Text
                         style={{
                           flex: 1,
-                          color: '#d62828',
+                          color: Colors.basePrimaryColor,
                           fontSize: 13,
                           fontWeight: 'bold',
                         }}>
@@ -305,7 +307,7 @@ class ArticleDetailsScreen extends React.Component {
                   <View
                     style={{
                       zIndex: 1,
-                      backgroundColor: '#d62828',
+                      backgroundColor: Colors.basePrimaryColor,
                       alignItems: 'center',
                       borderRadius: 10,
                       height: 45,
@@ -327,7 +329,7 @@ class ArticleDetailsScreen extends React.Component {
                   </View>
                 </TouchableOpacity>
                 </View>
-                <View style={{flex: 0.20, flexDirection: 'row', backgroundColor: '#d62828', justifyContent: 'space-around'}}>
+                <View style={{flex: 0.20, flexDirection: 'row', backgroundColor: Colors.basePrimaryColor, justifyContent: 'space-around'}}>
                     <Icon
                       name={'random'}
                       size={21}
@@ -408,7 +410,7 @@ function HomeScreen({navigation}) {
             },
           })}
           tabBarOptions={{
-            activeTintColor: '#d62828',
+            activeTintColor: Colors.basePrimaryColor,
             inactiveTintColor: 'gray',
           }}>
           <Tab.Screen name="Trending" component={TrendingScreen} />
@@ -431,7 +433,7 @@ export default function App() {
           name="Trending"
           options={{
             drawerIcon: config => (
-              <Icon name="compass" size={30} color="#d62828" />
+              <Icon name="compass" size={30} color={Colors.basePrimaryColor} />
             ),
           }}
           component={HomeScreen}
@@ -440,7 +442,7 @@ export default function App() {
           name="For You"
           options={{
             drawerIcon: config => (
-              <Icon name="group" size={20} color="#d62828" />
+              <Icon name="group" size={20} color={Colors.basePrimaryColor} />
             ),
           }}
           component={ForYouScreen}
@@ -449,7 +451,7 @@ export default function App() {
           name="Article Details"
           options={{
             drawerIcon: config => (
-              <Icon name="circle" size={20} color="#d62828" />
+              <Icon name="circle" size={20} color={Colors.basePrimaryColor} />
             ),
           }}
           component={ArticleDetailsScreen}
