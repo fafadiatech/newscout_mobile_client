@@ -11,7 +11,6 @@ class IconGridItem extends React.Component {
         return(
             <View
             style={componentStyles.iconGridItemView}>
-            <TouchableOpacity>
               <Icon
                 name={this.props.icon}
                 size={80}
@@ -22,7 +21,6 @@ class IconGridItem extends React.Component {
                 style={componentStyles.captionStyle}>
                 {this.props.caption}
               </Text>
-            </TouchableOpacity>
           </View>
         );
     }

@@ -3,14 +3,22 @@ import {
   Text,
   View,
   FlatList,
-  ScrollView
+  ScrollView,
+  TouchableOpacity,
+  Button
 } from 'react-native';
 
 import styles from '../styles/Base';
 
-import IconGridItem from '../components/IconGridItem';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-class CategoriesScreen extends React.Component {
+import IconGridItem from '../components/IconGridItem';
+import ArticleListScreen from './ArticleListScreen';
+
+const Stack = createStackNavigator();
+
+class CategoriesScreenListView extends React.Component {
     constructor(props) {
       super(props);
       this.state = {dataSource: {}};
@@ -18,17 +26,22 @@ class CategoriesScreen extends React.Component {
   
     componentDidMount() {
       let items = [
-        {id: 0, icon: 'globe', caption: 'By Region'},
-        {id: 1, icon: 'pie-chart', caption: 'By Sector'},
-        {id: 2, icon: 'usd', caption: 'Finance'},
-        {id: 3, icon: 'money', caption: 'Economics'},
-        {id: 4, icon: 'th', caption: 'Misc'},
+        {id: 0, icon: 'pie-chart', caption: 'By Sector', menuName: 'Sector Updates'},
+        {id: 1, icon: 'globe', caption: 'By Region', menuName: 'Regional Updates'},
+        {id: 2, icon: 'usd', caption: 'Finance', menuName: 'Finance'},
+        {id: 3, icon: 'money', caption: 'Economics', menuName: 'Economics'},
+        {id: 4, icon: 'th', caption: 'Misc', menuName: 'Misc'},
       ];
       this.setState({
         dataSource: items,
       });
     }
   
+    navigateToArticlesList = (selection) => {
+      console.log("Called");
+      this.props.navigation.navigate('Articles List', {category: 'Tech', selectedOption: selection});
+    }
+
     render() {
       return (
         <View style={styles.flexible}>
@@ -44,7 +57,9 @@ class CategoriesScreen extends React.Component {
               style={styles.flexible}
               data={this.state.dataSource}
               renderItem={({item}) => (
-                <IconGridItem icon={item.icon} caption={item.caption} />
+                <TouchableOpacity style={{flex: 1}} onPress={() => this.navigateToArticlesList(item.menuName)}>
+                  <IconGridItem icon={item.icon} caption={item.caption} />
+                </TouchableOpacity>
               )}
               //Setting the number of column
               numColumns={2}
@@ -56,4 +71,14 @@ class CategoriesScreen extends React.Component {
     }
   }
 
+function CategoriesScreen() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="CategoriesScreenListView" >
+        <Stack.Screen name="CategoriesScreenListView" component={CategoriesScreenListView} options={{headerShown: false}} />
+        <Stack.Screen name="Articles List" component={ArticleListScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 export default CategoriesScreen;

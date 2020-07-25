@@ -16,25 +16,21 @@ const deviceType = PlatformConstants.interfaceIdiom;
 class ArticleListScreen extends React.Component {
     constructor(props) {
       super(props);
+      const selectedOption = this.props.route.params.selectedOption;
       this.state = {
-        dataSource: {},
+        articles: [],
         pillMenuFlex: 0.09,
         pillMenu: [
-          {text: "Banking"},
-          {text: "Retail"},
-          {text: "Tech"},
-          {text: "Energy"},
-          {text: "Food & Drinks"},
-          {text: "Manufacturing"},
-          {text: "FinTech"},
-          {text: "Media"},
-        ]
+        ],
+        category: '',
+        selectedOption: selectedOption,
       };
+      this.fetchMenu(selectedOption);
       this.scrollView = React.createRef()
     }
   
-    callAPI = () => {
-      return fetch('http://www.newscout.in/api/v1/article/search/?domain=newscout&category=Tech&format=json&rows=100')
+    callAPI = (category) => {
+      return fetch(`http://www.newscout.in/api/v1/article/search/?domain=newscout&category=${category}&format=json&rows=100`)
         .then(response => response.json())
         .then(json => {
           this.setState({
@@ -46,9 +42,25 @@ class ArticleListScreen extends React.Component {
         });
     };
   
-    componentDidMount() {
-      this.callAPI();
-    }
+    fetchMenu = (selectedOption) => {
+      return fetch('http://www.newscout.in/api/v1/menus/?domain=newscout&format=json')
+        .then(response => response.json())
+        .then(json => {
+          var menuCategories = [];
+          json.body.results.forEach(function(item){
+            if(item.heading.name == selectedOption){
+              item.heading.submenu.forEach(function(menuItem){
+                menuCategories.push({text: menuItem.name});
+              });
+            }
+          });
+          this.setState({pillMenu: menuCategories, category: menuCategories[0].text});
+          this.callAPI(menuCategories[0].text);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
   
     scrollToTop = () => {
       this.scrollView.scrollTo({y: 0});
@@ -67,6 +79,10 @@ class ArticleListScreen extends React.Component {
         this.setState({pillMenuFlex: 0.09});
       }
     };
+
+    categoryChanged = (newCategory) => {
+      this.setState({articles: [], category: newCategory});
+    }
 
     render() {
       var cardColumns = 0;
@@ -97,22 +113,39 @@ class ArticleListScreen extends React.Component {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               data={this.state.pillMenu}
-              renderItem={({item}) => (
-                <View style={{
-                  borderWidth: 1.5,
-                  marginLeft: 5,
-                  marginRight: 5,
-                  borderRadius: 15
-                }}>
-                  <Text style={{
-                    fontWeight: 'bold',
-                    fontSize: 21,
-                    marginLeft: 10,
-                    marginRight: 10,
-                    marginTop: 5}}
-                  >{item.text}</Text>
-                </View>
-              )} />
+              renderItem={({item}) => {
+                var pillColor = 'black';
+                if(item.text === this.state.category){
+                  pillColor = Colors.basePrimaryColor;
+                }
+                return(
+                  <TouchableOpacity onPress={() => {
+                    this.categoryChanged(item.text);
+                    this.callAPI(item.text);
+                  }}>
+                    <View style={{
+                      borderWidth: 1.5,
+                      marginLeft: 5,
+                      marginRight: 5,
+                      borderRadius: 15
+                    }}>
+                      <Text style={[
+                        {
+                          fontWeight: 'bold',
+                          fontSize: 21,
+                          marginLeft: 10,
+                          marginRight: 10,
+                          marginTop: 5,
+                          marginBottom: 5
+                        },
+                        {
+                          color: pillColor
+                        }]}
+                      >{item.text}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )
+              }} />
           </View>
           <ScrollView 
               showsVerticalScrollIndicator={false} 
@@ -120,7 +153,7 @@ class ArticleListScreen extends React.Component {
               ref={ref => (this.scrollView = ref)}
           >
             <Text style={styles.screenHeading}>
-              For You
+              {this.state.category}
             </Text>
             <FlatList
               numColumns={cardColumns}
