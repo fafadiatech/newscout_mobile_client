@@ -3,8 +3,13 @@ import {
   Text,
   View,
   SafeAreaView,
-  Image
+  Image,
+  Button
 } from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { WebView } from 'react-native-webview';
 
 import Swiper from 'react-native-swiper';
 
@@ -16,7 +21,12 @@ import * as Colors from '../styles/Colors';
 
 import componentStyles from '../styles/ArticleDetailsScreen';
 
-class ArticleDetailsScreen extends React.Component {
+function SourceScreen({ route, navigation }) {
+  const { url } = route.params;
+  return <WebView source={{ uri: url }} />;
+}
+
+class ArticleDetailsView extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -77,7 +87,7 @@ class ArticleDetailsScreen extends React.Component {
                       Anim incididunt esse eiusmod duis ullamco. Exercitation exercitation amet exercitation duis Lorem velit eu. Culpa consequat anim minim est elit. Tempor dolore magna consequat consequat sunt consectetur amet aliquip consectetur aliqua adipisicing culpa. Exercitation in velit dolore quis irure irure in aute dolore est velit quis ullamco fugiat. Labore ut elit adipisicing ea. Ut ex ex anim nulla do duis eiusmod anim ex.
                       Exercitation in velit dolore quis irure irure in aute dolore est velit quis ullamco fugiat. Labore ut elit adipisicing ea. Ut ex ex anim nulla do duis eiusmod anim ex.
                   </Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Source', {url: 'https://www.livemint.com/companies/news/intel-stunning-failure-heralds-end-of-era-for-us-chip-sector-11595647983933.html'})}>
                     <View
                       style={componentStyles.readMoreViewStyle}>
                       <Text
@@ -124,5 +134,18 @@ class ArticleDetailsScreen extends React.Component {
       );
     }
   }
+
+const Stack = createStackNavigator();
+
+function ArticleDetailsScreen() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="ArticleDetailsView" >
+        <Stack.Screen name="ArticleDetailsView" component={ArticleDetailsView} options={{headerShown: false}} />
+        <Stack.Screen name="Source" component={SourceScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 export default ArticleDetailsScreen;
