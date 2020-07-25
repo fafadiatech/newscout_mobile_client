@@ -22,6 +22,7 @@ class ArticleListScreen extends React.Component {
         pillMenuFlex: 0.09,
         pillMenu: [
         ],
+        page: 1,
         category: '',
         selectedOption: selectedOption,
       };
@@ -29,12 +30,14 @@ class ArticleListScreen extends React.Component {
       this.scrollView = React.createRef()
     }
   
-    callAPI = (category) => {
-      return fetch(`http://www.newscout.in/api/v1/article/search/?domain=newscout&category=${category}&format=json&rows=100`)
+    callAPI = (category, page=1) => {
+      return fetch(`http://www.newscout.in/api/v1/article/search/?domain=newscout&category=${category}&page=${page}&format=json&rows=100`)
         .then(response => response.json())
         .then(json => {
+          var newDataset = this.state.articles;
+          newDataset.push(...json.body.results);
           this.setState({
-            articles: json.body.results,
+            articles: newDataset,
           });
         })
         .catch(error => {
@@ -159,6 +162,13 @@ class ArticleListScreen extends React.Component {
               numColumns={cardColumns}
               style={styles.flexible}
               data={this.state.articles}
+              onEndReachedThreshold={0.5}
+              onEndReached={() => {
+                const currentPage = this.state.page + 1;
+                const currentCategory = this.state.category;
+                this.callAPI(currentCategory, currentPage + 1);
+                this.setState({ page: currentPage });
+              }}
               renderItem={({item, index}) => { 
                   if(index % 2 == 0){
                     return (
