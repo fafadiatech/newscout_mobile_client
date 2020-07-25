@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     },
     boldTitle: {
       flex: 2,
+      numberOfLines: 2,
       fontWeight: 'bold',
       fontSize: 20,
       marginTop: 10,

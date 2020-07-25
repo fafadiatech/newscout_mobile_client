@@ -1,14 +1,21 @@
 import * as React from 'react';
-import {View, Text, ScrollView, FlatList} from 'react-native';
+import {View, Text, ScrollView, FlatList, NativeModules, Platform} from 'react-native';
 
 import styles from '../styles/Base';
 
 import FeaturedItem from '../components/FeaturedItem';
 
+const {PlatformConstants} = NativeModules;
+const deviceType = PlatformConstants.interfaceIdiom;
+
 class TrendingScreen extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {dataSource: {}};
+      this.state = {
+        dataSource: {},
+        cardColumns: 0,
+        screenOrientation: "",
+      };
     }
     callAPI = () => {
       return fetch('http://www.newscout.in/api/v1/trending/?domain=newscout&format=json')
@@ -26,8 +33,16 @@ class TrendingScreen extends React.Component {
     componentDidMount() {
       this.callAPI();
     }
-  
+
     render() {
+
+      var cardColumns = 0;
+      if (Platform.isPad == true){
+          cardColumns = 3;
+      }else{
+          cardColumns = 1;
+      }
+
       return (
         <View style={styles.flexible}>
           <ScrollView
@@ -37,6 +52,7 @@ class TrendingScreen extends React.Component {
               Trending
             </Text>
             <FlatList
+              numColumns={cardColumns}
               style={styles.flexible}
               data={this.state.featuredArticles}
               renderItem={({item}) => (
@@ -47,7 +63,7 @@ class TrendingScreen extends React.Component {
                   ts={item.articles[0].published_on}
                 />
               )}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={(item, index) => index.toString() + this.state.cardColumns.toString()}
             />
           </ScrollView>
         </View>
