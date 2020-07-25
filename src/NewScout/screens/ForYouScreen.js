@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, ScrollView, FlatList} from 'react-native';
+import {View, Text, ScrollView, FlatList, NativeModules, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { FloatingAction } from "react-native-floating-action";
 
@@ -8,6 +8,9 @@ import styles from '../styles/Base';
 
 import LeftImageAlignedItem from '../components/LeftImageAlignedItem';
 import RightImageAlignedItem from '../components/RightImageAlignedItem';
+
+const {PlatformConstants} = NativeModules;
+const deviceType = PlatformConstants.interfaceIdiom;
 
 class ForYouScreen extends React.Component {
     constructor(props) {
@@ -38,6 +41,13 @@ class ForYouScreen extends React.Component {
     }
 
     render() {
+      var cardColumns = 0;
+      if (Platform.isPad == true){
+          cardColumns = 2;
+      }else{
+          cardColumns = 1;
+      }
+
       const actions = [
         {
           text: "Top",
@@ -59,6 +69,7 @@ class ForYouScreen extends React.Component {
               For You
             </Text>
             <FlatList
+              numColumns={cardColumns}
               style={styles.flexible}
               data={this.state.articles}
               renderItem={({item, index}) => { 

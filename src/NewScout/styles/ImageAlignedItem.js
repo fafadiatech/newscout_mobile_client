@@ -30,6 +30,8 @@ const componentStyles = StyleSheet.create({
     },
     roundedImage: {
         flex: 0.5,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: Colors.baseBackgroundSecondaryColor,
         marginLeft: 7,
         marginTop: 7,
@@ -40,6 +42,8 @@ const componentStyles = StyleSheet.create({
     },
     roundedImageRight: {
         flex: 0.5,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: Colors.baseBackgroundSecondaryColor,
         marginRight: 7,
         marginTop: 7,
