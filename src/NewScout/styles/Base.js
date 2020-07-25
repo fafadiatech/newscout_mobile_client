@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
       marginBottom: 15,
     },
     screenHeading: {
-      flex: 0.05,
+      flex: 0.07,
       marginTop: 10,
       marginLeft: 5,
       fontSize: 27,
