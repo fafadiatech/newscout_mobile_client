@@ -5,11 +5,10 @@ const componentStyles = StyleSheet.create({
     imageStyle: {
         flex: 1,
         backgroundColor: Colors.baseBackgroundSecondaryColor,
-        marginLeft: 10,
+        marginLeft: 5,
         marginRight: 5,
         marginTop: 15,
         marginBottom: 10,
-        width: 355,
         height: 180,
         borderRadius: 10,
     },
