@@ -3,6 +3,7 @@ import {
   Text,
   View,
   FlatList,
+  ScrollView
 } from 'react-native';
 
 import styles from '../styles/Base';
@@ -31,20 +32,25 @@ class CategoriesScreen extends React.Component {
     render() {
       return (
         <View style={styles.flexible}>
-          <Text
-            style={styles.screenHeading}>
-            Categories
-          </Text>
-          <FlatList
-            style={styles.flexible}
-            data={this.state.dataSource}
-            renderItem={({item}) => (
-              <IconGridItem icon={item.icon} caption={item.caption} />
-            )}
-            //Setting the number of column
-            numColumns={2}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          <ScrollView
+              showsVerticalScrollIndicator={false}
+              style={styles.flexible}
+          >
+            <Text
+              style={styles.screenHeading}>
+              Categories
+            </Text>
+            <FlatList
+              style={styles.flexible}
+              data={this.state.dataSource}
+              renderItem={({item}) => (
+                <IconGridItem icon={item.icon} caption={item.caption} />
+              )}
+              //Setting the number of column
+              numColumns={2}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </ScrollView>
         </View>
       );
     }

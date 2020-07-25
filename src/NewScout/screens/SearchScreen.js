@@ -3,6 +3,7 @@ import {
   Text,
   View,
   FlatList,
+  ScrollView
 } from 'react-native';
 
 import styles from '../styles/Base';
@@ -38,22 +39,27 @@ class SearchScreen extends React.Component {
     render() {
       return (
         <View style={styles.flexible}>
-          <Text
-            style={styles.screenHeading}>
-            Settings
-          </Text>
-          <FlatList
-            style={styles.flexible}
-            data={this.state.options}
-            renderItem={({item}) => (
-              <IconListViewItem 
-                icon={item.icon}
-                caption={item.caption}
-                supporting={item.supporting}
-              />
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          <ScrollView
+              showsVerticalScrollIndicator={false}
+              style={styles.flexible}
+          >
+            <Text
+              style={styles.screenHeading}>
+              Settings
+            </Text>
+            <FlatList
+              style={styles.flexible}
+              data={this.state.options}
+              renderItem={({item}) => (
+                <IconListViewItem
+                  icon={item.icon}
+                  caption={item.caption}
+                  supporting={item.supporting}
+                />
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </ScrollView>
         </View>
       );
     }

@@ -37,7 +37,7 @@ function AllTabs({navigation}) {
               } else if (route.name === 'For You') {
                 iconName = focused ? 'group' : 'group';
               } else if (route.name === 'Categories') {
-                iconName = focused ? 'newspaper-o' : 'newspaper-o';
+                iconName = focused ? 'columns' : 'columns';
               } else if (route.name === 'Search') {
                 iconName = focused ? 'search' : 'search';
               }
