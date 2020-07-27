@@ -16,6 +16,8 @@ import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
+import Modal, { SlideAnimation, ModalContent, ModalTitle } from 'react-native-modals';
+
 import styles from '../styles/Base';
 import * as Colors from '../styles/Colors';
 
@@ -31,6 +33,7 @@ class ArticleDetailsView extends React.Component {
       super(props);
       this.state = {
         data: ['Test 1', 'Test 2', 'Test 3'],
+        showSuggestions: false,
       };
     }
   
@@ -47,6 +50,17 @@ class ArticleDetailsView extends React.Component {
         ],
       });
     }
+
+    toggleSuggestions = () => {
+      console.log('toggling');
+      const currentState = this.state.showSuggestions;
+      if(currentState == true){
+        this.setState({ showSuggestions: false });
+      }else{
+        this.setState({ showSuggestions: true });
+      }
+    }
+
     render() {
       return (
         <Swiper
@@ -110,9 +124,11 @@ class ArticleDetailsView extends React.Component {
                         color={Colors.iconColor}
                         style={componentStyles.bottomBarIconStyle}
                       />
-                      <Text style={componentStyles.moreStoriesStyle}>
-                          More Stories
-                      </Text>
+                      <TouchableOpacity onPress={this.toggleSuggestions}>
+                        <Text style={componentStyles.moreStoriesStyle}>
+                            More Stories
+                        </Text>
+                      </TouchableOpacity>
                       <Icon
                         name={'arrow-up'}
                         size={21}
@@ -126,6 +142,31 @@ class ArticleDetailsView extends React.Component {
                         style={componentStyles.bottomBarIconStyle}
                       />
                   </View>
+                  <Modal.BottomModal
+                    height={0.5}
+                    width={1}
+                    visible={this.state.showSuggestions}
+                    modalAnimation={new SlideAnimation({
+                      slideFrom: 'bottom',
+                    })}
+                    modalTitle={
+                      <ModalTitle
+                        title="More Suggestions"
+                        hasTitleBar
+                      />
+                    }
+                    onTouchOutside={() => {
+                      this.setState({ showSuggestions: false });
+                    }}
+                  >
+                    <ModalContent
+                      style={{
+                        flex: 1,
+                      }}
+                    >
+                        <Text>This is nice!</Text>
+                    </ModalContent>
+                  </Modal.BottomModal>
                 </View>
                 </SafeAreaView>
               );
