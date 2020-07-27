@@ -7,6 +7,7 @@ import {
   NativeModules,
   Platform,
   RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {FloatingAction} from 'react-native-floating-action';
@@ -33,14 +34,25 @@ class ArticleListScreen extends React.Component {
       category: '',
       selectedOption: selectedOption,
       refreshing: false,
+      loading: false,
     };
     this.fetchMenu(selectedOption);
     this.scrollView = React.createRef();
   }
 
+  componentDidMount() {
+    // this.fetchMenu(selectedOption);
+  }
+
   callAPI = (category, page = 1) => {
+    if (!this.state.refreshing) {
+      this.setState({
+        loading: true,
+      });
+    }
     return fetch(
       `http://www.newscout.in/api/v1/article/search/?domain=newscout&category=${category}&page=${page}&format=json&rows=10`,
+      {timeout: 5000},
     )
       .then((response) => response.json())
       .then((json) => {
@@ -49,12 +61,14 @@ class ArticleListScreen extends React.Component {
         this.setState({
           articles: newDataset,
           refreshing: false,
+          loading: false,
         });
       })
       .catch((error) => {
         console.error(error);
         this.setState({
           refreshing: false,
+          loading: false,
         });
       });
   };
@@ -115,6 +129,18 @@ class ArticleListScreen extends React.Component {
       () => {
         this.callAPI(this.state.category);
       },
+    );
+  };
+
+  renderFooter = () => {
+    return (
+      <View style={[styles.indicatorcontainer, styles.indicatorhorizontal]}>
+        <ActivityIndicator
+          animating
+          size="large"
+          color={Colors.basePrimaryColor}
+        />
+      </View>
     );
   };
 
@@ -203,6 +229,7 @@ class ArticleListScreen extends React.Component {
             data={this.state.articles}
             onEndReachedThreshold={0.5}
             refreshing={this.state.refreshing}
+            ListFooterComponent={this.renderFooter}
             onEndReached={() => {
               const currentPage = this.state.page + 1;
               const currentCategory = this.state.category;

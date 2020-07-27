@@ -48,6 +48,15 @@ const styles = StyleSheet.create({
       marginLeft: 5,
       fontSize: 27,
       fontWeight: 'bold',
+    },
+    indicatorcontainer: {
+      flex: 1,
+      justifyContent: 'center'
+    },
+    iindicatorhorizontal: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      padding: 10
     }
   });
 
