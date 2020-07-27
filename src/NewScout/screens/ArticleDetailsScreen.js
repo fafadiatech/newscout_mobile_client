@@ -22,6 +22,8 @@ import styles from '../styles/Base';
 import * as Colors from '../styles/Colors';
 
 import componentStyles from '../styles/ArticleDetailsScreen';
+import MobileSuggestionsList from '../components/MobileSuggestionsList';
+import TabletSuggestionsList from '../components/TabletSuggestionsList';
 
 function SourceScreen({ route, navigation }) {
   const { url } = route.params;
@@ -41,6 +43,48 @@ class SuggestionsScreen extends React.Component {
       numOfRows: 4,
       visible: true,
       items: ['Test 1', 'Test 2', 'Test 3'],
+      data: [
+        {
+          coverImage: 'https://picsum.photos/200/200',
+          title: 'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
+          source: 'financialexpress.com'
+        },
+        {
+          coverImage: 'https://picsum.photos/200/200',
+          title: 'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
+          source: 'financialexpress.com'
+        },
+        {
+          coverImage: 'https://picsum.photos/200/200',
+          title: 'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
+          source: 'financialexpress.com'
+        },
+        {
+          coverImage: 'https://picsum.photos/200/200',
+          title: 'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
+          source: 'financialexpress.com'
+        },
+        {
+          coverImage: 'https://picsum.photos/200/200',
+          title: 'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
+          source: 'financialexpress.com'
+        },
+        {
+          coverImage: 'https://picsum.photos/200/200',
+          title: 'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
+          source: 'financialexpress.com'
+        },
+        {
+          coverImage: 'https://picsum.photos/200/200',
+          title: 'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
+          source: 'financialexpress.com'
+        },
+        {
+          coverImage: 'https://picsum.photos/200/200',
+          title: 'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
+          source: 'financialexpress.com'
+        },
+      ],
     };
     this.checkiPad();
   }
@@ -78,44 +122,7 @@ class SuggestionsScreen extends React.Component {
                 flex: 1,
               }}
             >
-                <View style={{flex: 1}}>
-                  <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                    <Image
-                      style={{flex: 1, margin: 5, borderRadius: 5}}
-                      source={{uri: 'https://picsum.photos/200/200'}}
-                    />
-                    <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                          Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                    </Text>
-                  </View>
-                  <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                    <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                          Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                    </Text>
-                    <Image
-                      style={{flex: 1, margin: 5, borderRadius: 5}}
-                      source={{uri: 'https://picsum.photos/200/200'}}
-                    />
-                  </View>
-                  <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                    <Image
-                      style={{flex: 1, margin: 5, borderRadius: 5}}
-                      source={{uri: 'https://picsum.photos/200/200'}}
-                    />
-                    <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                          Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                    </Text>
-                  </View>
-                  <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                    <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                          Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                    </Text>
-                    <Image
-                      style={{flex: 1, margin: 5, borderRadius: 5}}
-                      source={{uri: 'https://picsum.photos/200/200'}}
-                    />
-                  </View>
-                </View>
+              <MobileSuggestionsList data={this.state.data} />
             </ModalContent>
           </Modal.BottomModal>
         </View>
@@ -148,85 +155,7 @@ class SuggestionsScreen extends React.Component {
                 flex: 1,
               }}
             >
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                  <View style={{flex: 1}}>
-                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                      <Image
-                        style={{flex: 1, margin: 5, borderRadius: 5}}
-                        source={{uri: 'https://picsum.photos/200/200'}}
-                      />
-                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                      </Text>
-                    </View>
-                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                      <Image
-                        style={{flex: 1, margin: 5, borderRadius: 5}}
-                        source={{uri: 'https://picsum.photos/200/200'}}
-                      />
-                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                      </Text>
-                    </View>
-                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                      <Image
-                        style={{flex: 1, margin: 5, borderRadius: 5}}
-                        source={{uri: 'https://picsum.photos/200/200'}}
-                      />
-                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                      </Text>
-                    </View>
-                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                      <Image
-                        style={{flex: 1, margin: 5, borderRadius: 5}}
-                        source={{uri: 'https://picsum.photos/200/200'}}
-                      />
-                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                      </Text>
-                    </View>
-                  </View>
-
-                  <View style={{flex: 1}}>
-                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                      </Text>
-                      <Image
-                        style={{flex: 1, margin: 5, borderRadius: 5}}
-                        source={{uri: 'https://picsum.photos/200/200'}}
-                      />
-                    </View>
-                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                      </Text>
-                      <Image
-                        style={{flex: 1, margin: 5, borderRadius: 5}}
-                        source={{uri: 'https://picsum.photos/200/200'}}
-                      />
-                    </View>
-                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                      </Text>
-                      <Image
-                        style={{flex: 1, margin: 5, borderRadius: 5}}
-                        source={{uri: 'https://picsum.photos/200/200'}}
-                      />
-                    </View>
-                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
-                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
-                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
-                      </Text>
-                      <Image
-                        style={{flex: 1, margin: 5, borderRadius: 5}}
-                        source={{uri: 'https://picsum.photos/200/200'}}
-                      />
-                    </View>
-                  </View>
-                </View>
+              <TabletSuggestionsList data={this.state.data} />
             </ModalContent>
           </Modal.BottomModal>
         </View>
