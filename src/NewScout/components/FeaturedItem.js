@@ -13,7 +13,7 @@ class FeaturedItem extends React.Component {
     render(){
         return(
             <View style={componentStyles.cardUnitView}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {this.props.pressHandler()}}>
               <Text style={componentStyles.cardUnitColoredStrip}>.</Text>
               <Image
                 style={componentStyles.cardUnitImage}

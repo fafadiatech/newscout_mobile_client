@@ -4,11 +4,17 @@ import {View, Text, ScrollView, FlatList, NativeModules, Platform} from 'react-n
 import styles from '../styles/Base';
 
 import FeaturedItem from '../components/FeaturedItem';
+import ArticleDetailsScreen from '../screens/ArticleDetailsScreen';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const {PlatformConstants} = NativeModules;
 const deviceType = PlatformConstants.interfaceIdiom;
 
-class TrendingScreen extends React.Component {
+const Stack = createStackNavigator();
+
+class TrendingScreenView extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -56,12 +62,13 @@ class TrendingScreen extends React.Component {
               style={styles.flexible}
               data={this.state.featuredArticles}
               renderItem={({item}) => (
-                <FeaturedItem 
-                  coverImage={item.articles[0].cover_image}
-                  title={item.articles[0].title}
-                  source={item.articles[0].source}
-                  ts={item.articles[0].published_on}
-                />
+                  <FeaturedItem
+                    coverImage={item.articles[0].cover_image}
+                    title={item.articles[0].title}
+                    source={item.articles[0].source}
+                    ts={item.articles[0].published_on}
+                    pressHandler={() => {this.props.navigation.navigate('Article Details');}}
+                  />
               )}
               keyExtractor={(item, index) => index.toString() + this.state.cardColumns.toString()}
             />
@@ -70,5 +77,16 @@ class TrendingScreen extends React.Component {
       );
     }
   }
+
+function TrendingScreen() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="TrendingScreenView" mode="modal">
+        <Stack.Screen name="TrendingScreenView" component={TrendingScreenView} options={{headerShown: false}} />
+        <Stack.Screen name="Article Details" component={ArticleDetailsScreen} options={{headerShown: false}} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 export default TrendingScreen;
