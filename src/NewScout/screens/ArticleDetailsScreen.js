@@ -4,7 +4,7 @@ import {
   View,
   SafeAreaView,
   Image,
-  Button
+  Platform
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,6 +26,213 @@ import componentStyles from '../styles/ArticleDetailsScreen';
 function SourceScreen({ route, navigation }) {
   const { url } = route.params;
   return <WebView source={{ uri: url }} />;
+}
+
+class SuggestionsScreen extends React.Component {
+  checkiPad = () => {
+    if (Platform.isPad == true) {
+      this.setState({numOfRows: 8});
+    }
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      numOfRows: 4,
+      visible: true,
+      items: ['Test 1', 'Test 2', 'Test 3'],
+    };
+    this.checkiPad();
+  }
+
+  adaptToOrientationChange = () => {
+    this.checkiPad();
+  };
+
+  render(){
+    if(this.state.numOfRows === 4){
+      return (
+        <View
+          onLayout={event => this.adaptToOrientationChange(event)}
+        >
+          <Modal.BottomModal
+            height={0.80}
+            width={1}
+            visible={this.state.visible}
+            modalAnimation={new SlideAnimation({
+              slideFrom: 'bottom',
+            })}
+            modalTitle={
+              <ModalTitle
+                title="More Suggestions"
+                hasTitleBar
+              />
+            }
+            onTouchOutside={() => {
+              this.setState({ visible: false });
+              this.props.navigation.goBack();
+            }}
+          >
+            <ModalContent
+              style={{
+                flex: 1,
+              }}
+            >
+                <View style={{flex: 1}}>
+                  <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                    <Image
+                      style={{flex: 1, margin: 5, borderRadius: 5}}
+                      source={{uri: 'https://picsum.photos/200/200'}}
+                    />
+                    <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                          Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                    </Text>
+                  </View>
+                  <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                    <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                          Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                    </Text>
+                    <Image
+                      style={{flex: 1, margin: 5, borderRadius: 5}}
+                      source={{uri: 'https://picsum.photos/200/200'}}
+                    />
+                  </View>
+                  <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                    <Image
+                      style={{flex: 1, margin: 5, borderRadius: 5}}
+                      source={{uri: 'https://picsum.photos/200/200'}}
+                    />
+                    <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                          Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                    </Text>
+                  </View>
+                  <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                    <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                          Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                    </Text>
+                    <Image
+                      style={{flex: 1, margin: 5, borderRadius: 5}}
+                      source={{uri: 'https://picsum.photos/200/200'}}
+                    />
+                  </View>
+                </View>
+            </ModalContent>
+          </Modal.BottomModal>
+        </View>
+      );
+    }else{
+      return (
+        <View
+          onLayout={event => this.adaptToOrientationChange(event)}
+        >
+          <Modal.BottomModal
+            height={0.80}
+            width={1}
+            visible={this.state.visible}
+            modalAnimation={new SlideAnimation({
+              slideFrom: 'bottom',
+            })}
+            modalTitle={
+              <ModalTitle
+                title="More Suggestions"
+                hasTitleBar
+              />
+            }
+            onTouchOutside={() => {
+              this.setState({ visible: false });
+              this.props.navigation.goBack();
+            }}
+          >
+            <ModalContent
+              style={{
+                flex: 1,
+              }}
+            >
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                  <View style={{flex: 1}}>
+                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                      <Image
+                        style={{flex: 1, margin: 5, borderRadius: 5}}
+                        source={{uri: 'https://picsum.photos/200/200'}}
+                      />
+                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      </Text>
+                    </View>
+                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                      <Image
+                        style={{flex: 1, margin: 5, borderRadius: 5}}
+                        source={{uri: 'https://picsum.photos/200/200'}}
+                      />
+                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      </Text>
+                    </View>
+                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                      <Image
+                        style={{flex: 1, margin: 5, borderRadius: 5}}
+                        source={{uri: 'https://picsum.photos/200/200'}}
+                      />
+                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      </Text>
+                    </View>
+                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                      <Image
+                        style={{flex: 1, margin: 5, borderRadius: 5}}
+                        source={{uri: 'https://picsum.photos/200/200'}}
+                      />
+                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View style={{flex: 1}}>
+                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      </Text>
+                      <Image
+                        style={{flex: 1, margin: 5, borderRadius: 5}}
+                        source={{uri: 'https://picsum.photos/200/200'}}
+                      />
+                    </View>
+                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      </Text>
+                      <Image
+                        style={{flex: 1, margin: 5, borderRadius: 5}}
+                        source={{uri: 'https://picsum.photos/200/200'}}
+                      />
+                    </View>
+                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      </Text>
+                      <Image
+                        style={{flex: 1, margin: 5, borderRadius: 5}}
+                        source={{uri: 'https://picsum.photos/200/200'}}
+                      />
+                    </View>
+                    <View style={{flex: 1, flexDirection:'row', marginTop: 5}}>
+                      <Text style={{flex: 2, fontWeight: 'bold', fontSize: 17, margin: 5}}>
+                            Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      </Text>
+                      <Image
+                        style={{flex: 1, margin: 5, borderRadius: 5}}
+                        source={{uri: 'https://picsum.photos/200/200'}}
+                      />
+                    </View>
+                  </View>
+                </View>
+            </ModalContent>
+          </Modal.BottomModal>
+        </View>
+      );
+    }
+  }
 }
 
 class ArticleDetailsView extends React.Component {
@@ -51,16 +258,6 @@ class ArticleDetailsView extends React.Component {
       });
     }
 
-    toggleSuggestions = () => {
-      console.log('toggling');
-      const currentState = this.state.showSuggestions;
-      if(currentState == true){
-        this.setState({ showSuggestions: false });
-      }else{
-        this.setState({ showSuggestions: true });
-      }
-    }
-
     render() {
       return (
         <Swiper
@@ -70,14 +267,13 @@ class ArticleDetailsView extends React.Component {
           showsPagination={false}
           onIndexChanged={index => {
             if (index === 1) {
-              console.log('paginating');
               this.loadItems();
             }
           }}>
           {this.state.data.map &&
             this.state.data.map((item, i) => {
               return (
-                <SafeAreaView style={styles.flexible}>
+                <SafeAreaView style={styles.flexible} key={i}>
                 <View style={styles.slide1}>
                   <Image
                         style={componentStyles.imageStyle}
@@ -124,7 +320,7 @@ class ArticleDetailsView extends React.Component {
                         color={Colors.iconColor}
                         style={componentStyles.bottomBarIconStyle}
                       />
-                      <TouchableOpacity onPress={this.toggleSuggestions}>
+                      <TouchableOpacity onPress={() => this.props.navigation.navigate('Suggestions', {url: 'https://www.livemint.com/companies/news/intel-stunning-failure-heralds-end-of-era-for-us-chip-sector-11595647983933.html'})}>
                         <Text style={componentStyles.moreStoriesStyle}>
                             More Stories
                         </Text>
@@ -142,31 +338,6 @@ class ArticleDetailsView extends React.Component {
                         style={componentStyles.bottomBarIconStyle}
                       />
                   </View>
-                  <Modal.BottomModal
-                    height={0.5}
-                    width={1}
-                    visible={this.state.showSuggestions}
-                    modalAnimation={new SlideAnimation({
-                      slideFrom: 'bottom',
-                    })}
-                    modalTitle={
-                      <ModalTitle
-                        title="More Suggestions"
-                        hasTitleBar
-                      />
-                    }
-                    onTouchOutside={() => {
-                      this.setState({ showSuggestions: false });
-                    }}
-                  >
-                    <ModalContent
-                      style={{
-                        flex: 1,
-                      }}
-                    >
-                        <Text>This is nice!</Text>
-                    </ModalContent>
-                  </Modal.BottomModal>
                 </View>
                 </SafeAreaView>
               );
@@ -184,6 +355,7 @@ function ArticleDetailsScreen() {
       <Stack.Navigator initialRouteName="ArticleDetailsView" >
         <Stack.Screen name="ArticleDetailsView" component={ArticleDetailsView} options={{headerShown: false}} />
         <Stack.Screen name="Source" component={SourceScreen} />
+        <Stack.Screen name="Suggestions" component={SuggestionsScreen} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
