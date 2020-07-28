@@ -22,6 +22,7 @@ import ArticleDetailsScreen from './screens/ArticleDetailsScreen';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const Header = createStackNavigator();
+const MainStack = createStackNavigator();
 
 function AllTabs({navigation}) {
   return (
@@ -60,13 +61,23 @@ function AllTabs({navigation}) {
   );
 }
 
+function AllScreens({navigation}) {
+  return (
+    <NavigationContainer independent={true}>
+      <MainStack.Navigator>
+        <MainStack.Screen name="AllTabs" component={AllTabs} />
+        <MainStack.Screen name="Article Details" component={ArticleDetailsScreen} />
+      </MainStack.Navigator>
+    </NavigationContainer>
+  );
+}
 
-function HomeScreen({navigation}) {
+function ScreensWithHeader({navigation}) {
   return (
     <Header.Navigator>
       <Header.Screen
         name="NewScout"
-        component={AllTabs}
+        component={AllScreens}
         options={{
           title: 'NewScout',
           headerStyle: {
@@ -115,7 +126,7 @@ export default function App() {
               <Icon name="compass" size={30} color={Colors.basePrimaryColor} />
             ),
           }}
-          component={HomeScreen}
+          component={ScreensWithHeader}
         />
         <Drawer.Screen
           name="For You"

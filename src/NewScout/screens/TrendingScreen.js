@@ -14,7 +14,7 @@ const deviceType = PlatformConstants.interfaceIdiom;
 
 const Stack = createStackNavigator();
 
-class TrendingScreenView extends React.Component {
+class TrendingScreen extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -67,7 +67,7 @@ class TrendingScreenView extends React.Component {
                     title={item.articles[0].title}
                     source={item.articles[0].source}
                     ts={item.articles[0].published_on}
-                    pressHandler={() => {this.props.navigation.navigate('Article Details');}}
+                    pressHandler={() => {this.props.navigation.push('Article Details', {fromScreen: 'Trending'});}}
                   />
               )}
               keyExtractor={(item, index) => index.toString() + this.state.cardColumns.toString()}
@@ -77,16 +77,5 @@ class TrendingScreenView extends React.Component {
       );
     }
   }
-
-function TrendingScreen() {
-  return (
-    <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="TrendingScreenView" mode="modal">
-        <Stack.Screen name="TrendingScreenView" component={TrendingScreenView} options={{headerShown: false}} />
-        <Stack.Screen name="Article Details" component={ArticleDetailsScreen} options={{headerShown: false}} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
 
 export default TrendingScreen;
