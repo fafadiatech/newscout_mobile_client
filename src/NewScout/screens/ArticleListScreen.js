@@ -40,10 +40,6 @@ class ArticleListScreen extends React.Component {
     this.scrollView = React.createRef();
   }
 
-  componentDidMount() {
-    // this.fetchMenu(selectedOption);
-  }
-
   callAPI = (category, page = 1) => {
     if (!this.state.refreshing) {
       this.setState({
@@ -52,7 +48,6 @@ class ArticleListScreen extends React.Component {
     }
     return fetch(
       `http://www.newscout.in/api/v1/article/search/?domain=newscout&category=${category}&page=${page}&format=json&rows=10`,
-      {timeout: 5000},
     )
       .then((response) => response.json())
       .then((json) => {
@@ -62,6 +57,7 @@ class ArticleListScreen extends React.Component {
           articles: newDataset,
           refreshing: false,
           loading: false,
+          page: page,
         });
       })
       .catch((error) => {
@@ -233,8 +229,7 @@ class ArticleListScreen extends React.Component {
             onEndReached={() => {
               const currentPage = this.state.page + 1;
               const currentCategory = this.state.category;
-              this.callAPI(currentCategory, currentPage + 1);
-              this.setState({page: currentPage});
+              this.callAPI(currentCategory, currentPage);
             }}
             renderItem={({item, index}) => {
               if (index % 2 == 0) {
