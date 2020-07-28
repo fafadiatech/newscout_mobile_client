@@ -171,8 +171,22 @@ class ArticleDetailsView extends React.Component {
         data: ['Test 1', 'Test 2', 'Test 3'],
         showSuggestions: false,
       };
+      this.callAPI(this.props.route.params.articleSlug);
     }
   
+    callAPI = (articleSlug) => {
+      return fetch(`http://www.newscout.in/api/v1/articles/${articleSlug}/?domain=newscout&format=json`)
+        .then(response => response.json())
+        .then(json => {
+          this.setState({
+            data: [json.body.article],
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
+
     loadItems() {
       this.setState({
         data: [
@@ -206,11 +220,11 @@ class ArticleDetailsView extends React.Component {
                 <View style={styles.slide1}>
                   <Image
                         style={componentStyles.imageStyle}
-                        source={{uri: 'https://picsum.photos/400/400'}}
+                        source={{uri: item.cover_image}}
                   />
                   <View style={{flex: 1.5}}>
                     <Text numbeofLines={2} style={componentStyles.titleStyle}>
-                      Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
+                      {item.title}
                     </Text>
                     <View style={{flex: 0.25, flexDirection: 'row'}}>
                       <Text style={{flex: 1, marginLeft: 10, fontSize: 13}}>
@@ -218,13 +232,12 @@ class ArticleDetailsView extends React.Component {
                       </Text>
                       <Text
                           style={styles.source}>
-                        financialexpress.com
+                        {item.source}
                       </Text>
                     </View>
                     <Text
                       style={componentStyles.blurbStyle}>
-                      Anim incididunt esse eiusmod duis ullamco. Exercitation exercitation amet exercitation duis Lorem velit eu. Culpa consequat anim minim est elit. Tempor dolore magna consequat consequat sunt consectetur amet aliquip consectetur aliqua adipisicing culpa. Exercitation in velit dolore quis irure irure in aute dolore est velit quis ullamco fugiat. Labore ut elit adipisicing ea. Ut ex ex anim nulla do duis eiusmod anim ex.
-                      Exercitation in velit dolore quis irure irure in aute dolore est velit quis ullamco fugiat. Labore ut elit adipisicing ea. Ut ex ex anim nulla do duis eiusmod anim ex.
+                      {item.blurb}
                   </Text>
                   <TouchableOpacity onPress={() => this.props.navigation.navigate('Source', {url: 'https://www.livemint.com/companies/news/intel-stunning-failure-heralds-end-of-era-for-us-chip-sector-11595647983933.html'})}>
                     <View
@@ -278,11 +291,18 @@ class ArticleDetailsView extends React.Component {
 
 const Stack = createStackNavigator();
 
-function ArticleDetailsScreen() {
+function ArticleDetailsScreen({route, navigation}) {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="ArticleDetailsView" >
-        <Stack.Screen name="ArticleDetailsView" component={ArticleDetailsView} options={{headerShown: false}} />
+        <Stack.Screen name="ArticleDetailsView"
+          component={ArticleDetailsView}
+          options={{headerShown: false}}
+          initialParams={{
+            articleID: route.params.articleID,
+            articleSlug: route.params.articleSlug,
+          }}
+        />
         <Stack.Screen name="Source" component={SourceScreen} />
         <Stack.Screen name="Suggestions" component={SuggestionsScreen} options={{headerShown: false}} />
       </Stack.Navigator>
