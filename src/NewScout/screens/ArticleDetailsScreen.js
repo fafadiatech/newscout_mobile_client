@@ -209,7 +209,7 @@ class ArticleDetailsView extends React.Component {
                         source={{uri: 'https://picsum.photos/400/400'}}
                   />
                   <View style={{flex: 1.5}}>
-                    <Text style={componentStyles.titleStyle}>
+                    <Text numbeofLines={2} style={componentStyles.titleStyle}>
                       Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.
                     </Text>
                     <View style={{flex: 0.25, flexDirection: 'row'}}>

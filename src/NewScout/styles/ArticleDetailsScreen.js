@@ -13,7 +13,7 @@ const componentStyles = StyleSheet.create({
         borderRadius: 10,
     },
     titleStyle: {
-        flex: 0.60, 
+        flex: 0.75,
         marginLeft: 10, 
         fontSize: 20, 
         fontWeight: 'bold'
