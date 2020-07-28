@@ -214,6 +214,7 @@ class ArticleListScreen extends React.Component {
           ref={(ref) => (this.scrollView = ref)}
           refreshControl={
             <RefreshControl
+              colors={[Colors.basePrimaryColor]}
               refreshing={this.state.refreshing}
               onRefresh={this.handleRefresh}
             />
