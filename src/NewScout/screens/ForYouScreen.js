@@ -35,6 +35,11 @@ class ForYouScreen extends React.Component {
   }
 
   callAPI = (page = 1) => {
+    if (!this.state.refreshing) {
+      this.setState({
+        loading: true,
+      });
+    }
     return fetch(
       `http://www.newscout.in/api/v1/article/search/?domain=newscout&category=Uncategorised&page=${page}&format=json&rows=10`,
     )
