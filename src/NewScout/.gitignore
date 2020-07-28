@@ -60,3 +60,6 @@ buck-out/
 
 # Shared Data
 xcshareddata/
+
+# VS Code
+.vscode/
