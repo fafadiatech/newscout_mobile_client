@@ -67,7 +67,14 @@ class TrendingScreen extends React.Component {
                     title={item.articles[0].title}
                     source={item.articles[0].source}
                     ts={item.articles[0].published_on}
-                    pressHandler={() => {this.props.navigation.push('Article Details', {fromScreen: 'Trending'});}}
+                    pressHandler={() => {
+                      this.props.navigation.push('Article Details',
+                        {
+                          fromScreen: 'Trending',
+                          articleID: item.articles[0].id,
+                          articleSlug: item.articles[0].slug,
+                        }
+                      );}}
                   />
               )}
               keyExtractor={(item, index) => index.toString() + this.state.cardColumns.toString()}
