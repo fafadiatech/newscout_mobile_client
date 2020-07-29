@@ -1,10 +1,7 @@
 import * as React from 'react';
-import {
-  SafeAreaView,
-  Text,
-} from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {SafeAreaView, Text} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator, DrawerContent} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -17,7 +14,8 @@ import ForYouScreen from './screens/ForYouScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
 import SearchScreen from './screens/SearchScreen';
 import ArticleDetailsScreen from './screens/ArticleDetailsScreen';
-
+import MainTabScreen from './screens/MainTabScreen';
+import {DrawerContents} from './screens/DrawerContents';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -66,7 +64,10 @@ function AllScreens({navigation}) {
     <NavigationContainer independent={true}>
       <MainStack.Navigator>
         <MainStack.Screen name="AllTabs" component={AllTabs} />
-        <MainStack.Screen name="Article Details" component={ArticleDetailsScreen} />
+        <MainStack.Screen
+          name="Article Details"
+          component={ArticleDetailsScreen}
+        />
       </MainStack.Navigator>
     </NavigationContainer>
   );
@@ -84,15 +85,17 @@ function ScreensWithHeader({navigation}) {
             backgroundColor: Colors.basePrimaryColor,
           },
           headerLeft: () => {
-            return(
+            return (
               <Icon
                 name={'bars'}
                 size={25}
                 color={'white'}
                 style={{marginLeft: 13}}
-                onPress={() => {navigation.openDrawer()}}
+                onPress={() => {
+                  navigation.openDrawer();
+                }}
               />
-            )
+            );
           },
           headerTitleStyle: {
             fontWeight: 'bold',
@@ -104,50 +107,60 @@ function ScreensWithHeader({navigation}) {
     </Header.Navigator>
   );
 }
-
 export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Home"
-        drawerContentOptions={{
-          activeTintColor: Colors.burgerMenuTintColor,
-          labelStyle: {
-            fontWeight: 'bold',
-            fontSize: 19,
-            color: Colors.basePrimaryColor
-          },
-        }}
-      >
-        <Drawer.Screen
-          name="Trending"
-          options={{
-            drawerIcon: config => (
-              <Icon name="compass" size={30} color={Colors.basePrimaryColor} />
-            ),
-          }}
-          component={ScreensWithHeader}
-        />
-        <Drawer.Screen
-          name="For You"
-          options={{
-            drawerIcon: config => (
-              <Icon name="group" size={20} color={Colors.basePrimaryColor} />
-            ),
-          }}
-          component={ForYouScreen}
-        />
-        <Drawer.Screen
-          name="Article Details"
-          options={{
-            drawerIcon: config => (
-              <Icon name="circle" size={20} color={Colors.basePrimaryColor} />
-            ),
-          }}
-          component={ArticleDetailsScreen}
-        />
+        initialRouteName="Trending"
+        drawerContent={(props) => <DrawerContents {...props} />}>
+        <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
 
+// function AppOld() {
+//   return (
+//     <NavigationContainer>
+//       <Drawer.Navigator
+//         initialRouteName="Home"
+//         drawerContentOptions={{
+//           activeTintColor: Colors.burgerMenuTintColor,
+//           labelStyle: {
+//             fontWeight: 'bold',
+//             fontSize: 19,
+//             color: Colors.basePrimaryColor,
+//           },
+//         }}>
+//         <Drawer.Screen
+//           name="Trending"
+//           options={{
+//             onPress: () => this.navigator.navigate('Search'),
+//             drawerIcon: (config) => (
+//               <Icon name="compass" size={30} color={Colors.basePrimaryColor} />
+//             ),
+//           }}
+//           component={ScreensWithHeader}
+//         />
+//         <Drawer.Screen
+//           name="For You"
+//           options={{
+//             drawerIcon: (config) => (
+//               <Icon name="group" size={20} color={Colors.basePrimaryColor} />
+//             ),
+//           }}
+//           component={ForYouScreen}
+//         />
+//         <Drawer.Screen
+//           name="Article Details"
+//           options={{
+//             drawerIcon: (config) => (
+//               <Icon name="circle" size={20} color={Colors.basePrimaryColor} />
+//             ),
+//           }}
+//           component={ArticleDetailsScreen}
+//         />
+//       </Drawer.Navigator>
+//     </NavigationContainer>
+//   );
+// }
