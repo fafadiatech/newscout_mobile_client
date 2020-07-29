@@ -140,13 +140,22 @@ export default function App() {
           component={ForYouScreen}
         />
         <Drawer.Screen
-          name="Article Details"
+          name="Categories"
           options={{
             drawerIcon: config => (
-              <Icon name="circle" size={20} color={Colors.basePrimaryColor} />
+              <Icon name="columns" size={20} color={Colors.basePrimaryColor} />
             ),
           }}
-          component={ArticleDetailsScreen}
+          component={CategoriesScreen}
+        />
+        <Drawer.Screen
+          name="Search"
+          options={{
+            drawerIcon: config => (
+              <Icon name="search" size={20} color={Colors.basePrimaryColor} />
+            ),
+          }}
+          component={SearchScreen}
         />
       </Drawer.Navigator>
     </NavigationContainer>
