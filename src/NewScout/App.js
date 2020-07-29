@@ -16,6 +16,7 @@ import TrendingScreen from './screens/TrendingScreen';
 import ForYouScreen from './screens/ForYouScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
 import SearchScreen from './screens/SearchScreen';
+import ArticleListScreen from './screens/ArticleListScreen';
 import ArticleDetailsScreen from './screens/ArticleDetailsScreen';
 
 
@@ -66,6 +67,7 @@ function AllScreens({navigation}) {
     <NavigationContainer independent={true}>
       <MainStack.Navigator>
         <MainStack.Screen name="AllTabs" component={AllTabs} />
+        <MainStack.Screen name="Articles List" component={ArticleListScreen} />
         <MainStack.Screen name="Article Details" component={ArticleDetailsScreen} />
       </MainStack.Navigator>
     </NavigationContainer>

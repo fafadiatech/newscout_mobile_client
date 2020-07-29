@@ -10,15 +10,10 @@ import {
 
 import styles from '../styles/Base';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
 import IconGridItem from '../components/IconGridItem';
-import ArticleListScreen from './ArticleListScreen';
 
-const Stack = createStackNavigator();
 
-class CategoriesScreenListView extends React.Component {
+class CategoriesScreen extends React.Component {
     constructor(props) {
       super(props);
       this.state = {dataSource: {}};
@@ -39,7 +34,7 @@ class CategoriesScreenListView extends React.Component {
   
     navigateToArticlesList = (selection) => {
       console.log("Called");
-      this.props.navigation.navigate('Articles List', {category: 'Tech', selectedOption: selection});
+      this.props.navigation.push('Articles List', {category: 'Tech', selectedOption: selection});
     }
 
     render() {
@@ -71,14 +66,4 @@ class CategoriesScreenListView extends React.Component {
     }
   }
 
-function CategoriesScreen() {
-  return (
-    <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="CategoriesScreenListView" >
-        <Stack.Screen name="CategoriesScreenListView" component={CategoriesScreenListView} options={{headerShown: false}} />
-        <Stack.Screen name="Articles List" component={ArticleListScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
 export default CategoriesScreen;

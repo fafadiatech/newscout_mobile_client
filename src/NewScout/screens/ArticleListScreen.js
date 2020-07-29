@@ -177,6 +177,7 @@ class ArticleListScreen extends React.Component {
                             title={item.title}
                             source={item.source}
                             ts={item.published_on}
+                            onPressHandler={() => {this.props.navigation.push('Article Details', {articleID: item.id, articleSlug: item.slug})}}
                         />
                     )
                   }else{
@@ -186,6 +187,7 @@ class ArticleListScreen extends React.Component {
                             title={item.title}
                             source={item.source}
                             ts={item.published_on}
+                            onPressHandler={() => {this.props.navigation.push('Article Details', {articleID: item.id, articleSlug: item.slug})}}
                         />
                     )
                   }
