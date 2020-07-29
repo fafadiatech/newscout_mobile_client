@@ -9,7 +9,7 @@ class RightImageAlignedItem extends React.Component {
         return(
             <View
             style={componentStyles.cardUnitView}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={this.props.onPressHandler}>
               <Text style={componentStyles.coloredStripe}>.</Text>
               <View style={styles.rowAlignedView}>
                 <View style={styles.flexible}>

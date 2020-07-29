@@ -78,25 +78,23 @@ class ForYouScreen extends React.Component {
               renderItem={({item, index}) => { 
                   if(index % 2 == 0){
                     return (
-                        <TouchableOpacity onPress={() => {this.props.navigation.push('Article Details', {articleID: item.id, articleSlug: item.slug})}}>
                           <LeftImageAlignedItem
                               coverImage={item.cover_image}
                               title={item.title}
                               source={item.source}
                               ts={item.published_on}
+                              onPressHandler={() => {this.props.navigation.push('Article Details', {articleID: item.id, articleSlug: item.slug})}}
                           />
-                        </TouchableOpacity>
                     )
                   }else{
                     return (
-                        <TouchableOpacity onPress={() => {this.props.navigation.push('Article Details', {articleID: item.id, articleSlug: item.slug})}}>
                           <RightImageAlignedItem
                               coverImage={item.cover_image}
                               title={item.title}
                               source={item.source}
                               ts={item.published_on}
+                              onPressHandler={() => {this.props.navigation.push('Article Details', {articleID: item.id, articleSlug: item.slug})}}
                           />
-                        </TouchableOpacity>
                     )
                   }
                 }
