@@ -22,7 +22,13 @@ class TrendingScreen extends React.Component {
         cardColumns: 0,
         screenOrientation: "",
       };
+      this.scrollView = React.createRef()
     }
+
+    scrollToTop = () => {
+      this.scrollView.scrollTo({y: 0});
+    }
+
     callAPI = () => {
       return fetch('http://www.newscout.in/api/v1/trending/?domain=newscout&format=json')
         .then(response => response.json())
@@ -38,6 +44,9 @@ class TrendingScreen extends React.Component {
   
     componentDidMount() {
       this.callAPI();
+      this._unsubscribe = this.props.navigation.addListener('tabPress', (e) => {
+        this.scrollToTop();
+      });
     }
 
     render() {
@@ -52,6 +61,7 @@ class TrendingScreen extends React.Component {
       return (
         <View style={styles.flexible}>
           <ScrollView
+            ref={ref => (this.scrollView = ref)}
             showsVerticalScrollIndicator={false}
             style={styles.flexible}>
             <Text style={styles.screenHeading}>
