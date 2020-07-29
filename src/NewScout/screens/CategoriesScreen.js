@@ -5,7 +5,6 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
-  Button
 } from 'react-native';
 
 import styles from '../styles/Base';

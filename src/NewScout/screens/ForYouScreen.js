@@ -8,7 +8,7 @@ import styles from '../styles/Base';
 
 import LeftImageAlignedItem from '../components/LeftImageAlignedItem';
 import RightImageAlignedItem from '../components/RightImageAlignedItem';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 const {PlatformConstants} = NativeModules;
 const deviceType = PlatformConstants.interfaceIdiom;

@@ -4,15 +4,9 @@ import {View, Text, ScrollView, FlatList, NativeModules, Platform} from 'react-n
 import styles from '../styles/Base';
 
 import FeaturedItem from '../components/FeaturedItem';
-import ArticleDetailsScreen from '../screens/ArticleDetailsScreen';
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 const {PlatformConstants} = NativeModules;
 const deviceType = PlatformConstants.interfaceIdiom;
-
-const Stack = createStackNavigator();
 
 class TrendingScreen extends React.Component {
     constructor(props) {
@@ -23,10 +17,6 @@ class TrendingScreen extends React.Component {
         screenOrientation: "",
       };
       this.scrollView = React.createRef()
-    }
-
-    scrollToTop = () => {
-      this.scrollView.scrollTo({y: 0});
     }
 
     callAPI = () => {
@@ -44,9 +34,6 @@ class TrendingScreen extends React.Component {
   
     componentDidMount() {
       this.callAPI();
-      this._unsubscribe = this.props.navigation.addListener('tabPress', (e) => {
-        this.scrollToTop();
-      });
     }
 
     render() {
