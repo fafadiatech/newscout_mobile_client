@@ -15,6 +15,7 @@ const componentStyles = StyleSheet.create({
     titleStyle: {
         flex: 0.75,
         marginLeft: 10, 
+        marginRight: 10,
         fontSize: 20, 
         fontWeight: 'bold'
     },

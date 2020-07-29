@@ -223,7 +223,7 @@ class ArticleDetailsView extends React.Component {
                         source={{uri: item.cover_image}}
                   />
                   <View style={{flex: 1.5}}>
-                    <Text numbeofLines={2} style={componentStyles.titleStyle}>
+                    <Text numberOfLines={2} style={componentStyles.titleStyle}>
                       {item.title}
                     </Text>
                     <View style={{flex: 0.25, flexDirection: 'row'}}>
@@ -239,7 +239,7 @@ class ArticleDetailsView extends React.Component {
                       style={componentStyles.blurbStyle}>
                       {item.blurb}
                   </Text>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Source', {url: 'https://www.livemint.com/companies/news/intel-stunning-failure-heralds-end-of-era-for-us-chip-sector-11595647983933.html'})}>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Source', {url: item.source_url})}>
                     <View
                       style={componentStyles.readMoreViewStyle}>
                       <Text
@@ -262,7 +262,7 @@ class ArticleDetailsView extends React.Component {
                         color={Colors.iconColor}
                         style={componentStyles.bottomBarIconStyle}
                       />
-                      <TouchableOpacity onPress={() => this.props.navigation.navigate('Suggestions', {url: 'https://www.livemint.com/companies/news/intel-stunning-failure-heralds-end-of-era-for-us-chip-sector-11595647983933.html'})}>
+                      <TouchableOpacity onPress={() => this.props.navigation.navigate('Suggestions', {url: item.source_url})}>
                         <Text style={componentStyles.moreStoriesStyle}>
                             More Stories
                         </Text>

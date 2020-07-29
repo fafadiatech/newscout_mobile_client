@@ -89,12 +89,14 @@ class ForYouScreen extends React.Component {
                     )
                   }else{
                     return (
-                        <RightImageAlignedItem 
-                            coverImage={item.cover_image}
-                            title={item.title}
-                            source={item.source}
-                            ts={item.published_on}
-                        />
+                        <TouchableOpacity onPress={() => {this.props.navigation.push('Article Details', {articleID: item.id, articleSlug: item.slug})}}>
+                          <RightImageAlignedItem
+                              coverImage={item.cover_image}
+                              title={item.title}
+                              source={item.source}
+                              ts={item.published_on}
+                          />
+                        </TouchableOpacity>
                     )
                   }
                 }
