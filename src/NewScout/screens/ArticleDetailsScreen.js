@@ -236,6 +236,8 @@ class ArticleDetailsView extends React.Component {
                       </Text>
                     </View>
                     <Text
+                      numberOfLines={10}
+                      ellipsizeMode={'tail'}
                       style={componentStyles.blurbStyle}>
                       {item.blurb}
                   </Text>
