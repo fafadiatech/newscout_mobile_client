@@ -52,117 +52,144 @@ export default MainTabScreen;
 const TrendingStackScreen = ({navigation}) => (
   <TrendingStack.Navigator
     screenOptions={{
-      haederStyle: {
-        backgroundcolor: '#009387',
+      title: 'NewScout',
+      headerStyle: {
+        backgroundColor: Colors.basePrimaryColor,
       },
-      headerTintColor: '#fff',
+      headerLeft: () => {
+        return (
+          <Icon
+            name={'bars'}
+            size={25}
+            color={'white'}
+            style={{marginLeft: 13}}
+            onPress={() => {
+              navigation.openDrawer();
+            }}
+          />
+        );
+      },
       headerTitleStyle: {
         fontWeight: 'bold',
+        fontSize: 20,
+        color: Colors.iconColor,
       },
     }}>
-    <TrendingStack.Screen
-      name="Trending"
-      component={TrendingScreen}
-      options={{
-        title: 'Trending',
-        headerLeft: () => (
-          <Icon.Button
-            name="bars"
-            size={25}
-            backgroundColor="#009387"
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
-      }}
-    />
+    <TrendingStack.Screen name="Trending" component={TrendingScreen} />
   </TrendingStack.Navigator>
 );
 
 const ForYouStackScreen = ({navigation}) => (
   <ForYouStack.Navigator
     screenOptions={{
-      haederStyle: {
-        backgroundcolor: '#009387',
+      title: 'NewScout',
+      headerStyle: {
+        backgroundColor: Colors.basePrimaryColor,
       },
-      headerTintColor: '#fff',
+      headerLeft: () => {
+        return (
+          <Icon
+            name={'bars'}
+            size={25}
+            color={'white'}
+            style={{marginLeft: 13}}
+            onPress={() => {
+              navigation.openDrawer();
+            }}
+          />
+        );
+      },
       headerTitleStyle: {
         fontWeight: 'bold',
-        color: '#000',
+        fontSize: 20,
+        color: Colors.iconColor,
       },
-      title: 'NewScout',
     }}>
-    <ForYouStack.Screen
-      name="ForYou"
-      component={ForYouScreen}
-      options={{
-        title: 'NewScout',
-        headerLeft: () => (
-          <Icon.Button
-            name="bars"
-            size={25}
-            backgroundColor="#009387"
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
-      }}
-    />
+    <ForYouStack.Screen name="ForYou" component={ForYouScreen} />
   </ForYouStack.Navigator>
 );
 
 const CategoriesStackScreen = ({navigation}) => (
   <CategoriesStack.Navigator
     screenOptions={{
-      haederStyle: {
-        backgroundcolor: '#009387',
+      title: 'NewScout',
+      headerStyle: {
+        backgroundColor: Colors.basePrimaryColor,
       },
-      headerTintColor: '#fff',
+      headerLeft: () => {
+        return (
+          <Icon
+            name={'bars'}
+            size={25}
+            color={'white'}
+            style={{marginLeft: 13}}
+            onPress={() => {
+              navigation.openDrawer();
+            }}
+          />
+        );
+      },
       headerTitleStyle: {
         fontWeight: 'bold',
+        fontSize: 20,
+        color: Colors.iconColor,
       },
     }}>
-    <CategoriesStack.Screen
-      name="Categories"
-      component={CategoriesScreen}
-      options={{
-        title: 'Categories',
-        headerLeft: () => (
-          <Icon.Button
-            name="bars"
-            size={25}
-            backgroundColor="#009387"
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
-      }}
-    />
+    <CategoriesStack.Screen name="Categories" component={CategoriesScreen} />
   </CategoriesStack.Navigator>
 );
 
 const SearchStackScreen = ({navigation}) => (
   <SearchStack.Navigator
     screenOptions={{
-      haederStyle: {
-        backgroundcolor: '#009387',
+      title: 'NewScout',
+      headerStyle: {
+        backgroundColor: Colors.basePrimaryColor,
       },
-      headerTintColor: '#fff',
+      headerLeft: () => {
+        return (
+          <Icon
+            name={'bars'}
+            size={25}
+            color={'white'}
+            style={{marginLeft: 13}}
+            onPress={() => {
+              navigation.openDrawer();
+            }}
+          />
+        );
+      },
       headerTitleStyle: {
         fontWeight: 'bold',
+        fontSize: 20,
+        color: Colors.iconColor,
       },
     }}>
-    <SearchStack.Screen
-      name="Search"
-      component={SearchScreen}
-      options={{
-        title: 'Search',
-        headerLeft: () => (
-          <Icon.Button
-            name="bars"
-            size={25}
-            backgroundColor="#009387"
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
-      }}
-    />
+    <SearchStack.Screen name="Search" component={SearchScreen} />
   </SearchStack.Navigator>
 );
+
+const screenHeaderOptions = () => ({
+  title: 'NewScout',
+  headerStyle: {
+    backgroundColor: Colors.basePrimaryColor,
+  },
+  headerLeft: () => {
+    return (
+      <Icon
+        name={'bars'}
+        size={25}
+        color={'white'}
+        style={{marginLeft: 13}}
+        onPress={() => {
+          navigation.openDrawer();
+        }}
+      />
+    );
+  },
+  headerTitleStyle: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: Colors.iconColor,
+  },
+});
