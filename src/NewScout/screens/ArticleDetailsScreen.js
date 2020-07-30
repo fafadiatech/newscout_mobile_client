@@ -11,7 +11,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {WebView} from 'react-native-webview';
-
+import TimeAgo from 'react-native-timeago';
 import Swiper from 'react-native-swiper';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -248,7 +248,7 @@ class ArticleDetailsView extends React.Component {
                     </Text>
                     <View style={{flex: 0.25, flexDirection: 'row'}}>
                       <Text style={{flex: 1, marginLeft: 10, fontSize: 13}}>
-                        within 5 hours
+                        <TimeAgo time={item.published_on} />
                       </Text>
                       <Text style={styles.source}>{item.source}</Text>
                     </View>
