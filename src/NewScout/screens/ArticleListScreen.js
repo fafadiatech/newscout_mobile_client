@@ -134,7 +134,7 @@ class ArticleListScreen extends React.Component {
 
   renderFooter = () => {
     return (
-      <View style={[styles.indicatorcontainer, styles.indicatorhorizontal]}>
+      <View style={[styles.progressbarcontainer, styles.progressbarhorizontal]}>
         <ActivityIndicator
           animating
           size="large"
