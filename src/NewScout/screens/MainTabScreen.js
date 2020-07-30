@@ -1,4 +1,5 @@
 import React from 'react';
+import {SafeAreaView} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import TrendingScreen from './TrendingScreen';
 import ForYouScreen from './ForYouScreen';
@@ -7,6 +8,7 @@ import SearchScreen from './SearchScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as Colors from '../styles/Colors';
+import styles from '../styles/Base';
 
 const TrendingStack = createStackNavigator();
 const ForYouStack = createStackNavigator();
@@ -15,38 +17,40 @@ const SearchStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MainTabScreen = () => (
-  <Tab.Navigator
-    initialRouteName="Trending"
-    screenOptions={({route}) => ({
-      tabBarIcon: ({focused, color, size}) => {
-        let iconName;
+  <SafeAreaView style={styles.flexible}>
+    <Tab.Navigator
+      initialRouteName="Trending"
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName;
 
-        if (route.name === 'Trending') {
-          iconName = focused ? 'compass' : 'compass';
-        } else if (route.name === 'For You') {
-          iconName = focused ? 'group' : 'group';
-        } else if (route.name === 'Categories') {
-          iconName = focused ? 'columns' : 'columns';
-        } else if (route.name === 'Search') {
-          iconName = focused ? 'search' : 'search';
-        }
+          if (route.name === 'Trending') {
+            iconName = focused ? 'compass' : 'compass';
+          } else if (route.name === 'For You') {
+            iconName = focused ? 'group' : 'group';
+          } else if (route.name === 'Categories') {
+            iconName = focused ? 'columns' : 'columns';
+          } else if (route.name === 'Search') {
+            iconName = focused ? 'search' : 'search';
+          }
 
-        // You can return any component that you like here!
-        return <Icon name={iconName} size={size} color={color} />;
-      },
-    })}
-    tabBarOptions={{
-      activeTintColor: Colors.basePrimaryColor,
-      inactiveTintColor: 'gray',
-    }}>
-    <Tab.Screen name="Trending" component={TrendingStackScreen} />
+          // You can return any component that you like here!
+          return <Icon name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: Colors.basePrimaryColor,
+        inactiveTintColor: 'gray',
+      }}>
+      <Tab.Screen name="Trending" component={TrendingStackScreen} />
 
-    <Tab.Screen name="For You" component={ForYouStackScreen} />
+      <Tab.Screen name="For You" component={ForYouStackScreen} />
 
-    <Tab.Screen name="Categories" component={CategoriesStackScreen} />
+      <Tab.Screen name="Categories" component={CategoriesStackScreen} />
 
-    <Tab.Screen name="Search" component={SearchStackScreen} />
-  </Tab.Navigator>
+      <Tab.Screen name="Search" component={SearchStackScreen} />
+    </Tab.Navigator>
+  </SafeAreaView>
 );
 export default MainTabScreen;
 const TrendingStackScreen = ({navigation}) => (
