@@ -170,15 +170,12 @@ class ArticleDetailsView extends React.Component {
     this.state = {
       data: [], //'Test 1', 'Test 2', 'Test 3'
       showSuggestions: false,
-      loading: false,
+      loading: true,
     };
     this.callAPI(this.props.route.params.articleSlug);
   }
 
   callAPI = (articleSlug) => {
-    this.setState({
-      loading: true,
-    });
     return fetch(
       `http://www.newscout.in/api/v1/articles/${articleSlug}/?domain=newscout&format=json`,
     )
