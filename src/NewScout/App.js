@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {
   SafeAreaView,
-  Text,
+  Text, Image,
 } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles/Base';
@@ -20,15 +20,16 @@ import ArticleListScreen from './screens/ArticleListScreen';
 import ArticleDetailsScreen from './screens/ArticleDetailsScreen';
 
 
+
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const Header = createStackNavigator();
 const MainStack = createStackNavigator();
 
-function AllTabs({route, navigation}) {
+function AllTabs({ route, navigation }) {
 
   var initialRoute = 'Trending';
-  if(route && route.params && route.params.selectedTabName){
+  if (route && route.params && route.params.selectedTabName) {
     initialRoute = route.params.selectedTabName;
   }
 
@@ -37,8 +38,8 @@ function AllTabs({route, navigation}) {
       <NavigationContainer independent={true}>
         <Tab.Navigator
           initialRouteName={initialRoute}
-          screenOptions={({route}) => ({
-            tabBarIcon: ({focused, color, size}) => {
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
               let iconName;
 
               if (route.name === 'Trending') {
@@ -69,10 +70,10 @@ function AllTabs({route, navigation}) {
   );
 }
 
-function AllScreens({route, navigation}) {
+function AllScreens({ route, navigation }) {
 
   var selectedTabName = '';
-  if(route && route.params && route.params.selectedTabName){
+  if (route && route.params && route.params.selectedTabName) {
     selectedTabName = route.params.selectedTabName;
   }
 
@@ -87,10 +88,10 @@ function AllScreens({route, navigation}) {
   );
 }
 
-function ScreensWithHeader({route, navigation}) {
+function ScreensWithHeader({ route, navigation }) {
 
   var selectedTabName = '';
-  if(route && route.params && route.params.selectedTabName){
+  if (route && route.params && route.params.selectedTabName) {
     selectedTabName = route.params.selectedTabName;
   }
 
@@ -103,19 +104,25 @@ function ScreensWithHeader({route, navigation}) {
         options={{
           title: 'NewScout',
           headerStyle: {
-            backgroundColor: Colors.basePrimaryColor,
+            backgroundColor: Colors.baseBackgroundPrimaryColor,
           },
           headerLeft: () => {
-            return(
+            return (
               <Icon
                 name={'bars'}
                 size={25}
-                color={'white'}
-                style={{marginLeft: 13}}
-                onPress={() => {navigation.openDrawer()}}
+                color={'red'}
+                style={{ marginLeft: 13 }}
+                onPress={() => { navigation.openDrawer() }}
               />
             )
           },
+          headerTitle: () => (
+            <Image style={{ width: 130, height: 48 }} source={require("./assets/Images/logo.png")} />
+          ),
+
+          headerTitleAlign: 'center',
+
           headerTitleStyle: {
             fontWeight: 'bold',
             fontSize: 20,
@@ -149,7 +156,7 @@ export default function App() {
             ),
           }}
           component={ScreensWithHeader}
-          initialParams={{ selectedTabName: 'Trending'}}
+          initialParams={{ selectedTabName: 'Trending' }}
         />
         <Drawer.Screen
           name="For You"
@@ -159,7 +166,7 @@ export default function App() {
             ),
           }}
           component={ScreensWithHeader}
-          initialParams={{ selectedTabName: 'For You'}}
+          initialParams={{ selectedTabName: 'For You' }}
         />
         <Drawer.Screen
           name="Categories"
@@ -169,7 +176,7 @@ export default function App() {
             ),
           }}
           component={ScreensWithHeader}
-          initialParams={{ selectedTabName: 'Categories'}}
+          initialParams={{ selectedTabName: 'Categories' }}
         />
         <Drawer.Screen
           name="Search"
@@ -179,7 +186,7 @@ export default function App() {
             ),
           }}
           component={ScreensWithHeader}
-          initialParams={{ selectedTabName: 'Search'}}
+          initialParams={{ selectedTabName: 'Search' }}
         />
       </Drawer.Navigator>
     </NavigationContainer>
