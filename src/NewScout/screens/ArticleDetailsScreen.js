@@ -8,14 +8,15 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {WebView} from 'react-native-webview';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { WebView } from 'react-native-webview';
 import TimeAgo from 'react-native-timeago';
 import Swiper from 'react-native-swiper';
+import Share from 'react-native-share';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import Modal, {
   SlideAnimation,
@@ -26,19 +27,20 @@ import Modal, {
 import styles from '../styles/Base';
 import * as Colors from '../styles/Colors';
 
+
 import componentStyles from '../styles/ArticleDetailsScreen';
 import MobileSuggestionsList from '../components/MobileSuggestionsList';
 import TabletSuggestionsList from '../components/TabletSuggestionsList';
 
-function SourceScreen({route, navigation}) {
-  const {url} = route.params;
-  return <WebView source={{uri: url}} />;
+function SourceScreen({ route, navigation }) {
+  const { url } = route.params;
+  return <WebView source={{ uri: url }} />;
 }
 
 class SuggestionsScreen extends React.Component {
   checkiPad = () => {
     if (Platform.isPad == true) {
-      this.setState({numOfRows: 8});
+      this.setState({ numOfRows: 8 });
     }
   };
 
@@ -122,7 +124,7 @@ class SuggestionsScreen extends React.Component {
             }
             modalTitle={<ModalTitle title="More Suggestions" hasTitleBar />}
             onTouchOutside={() => {
-              this.setState({visible: false});
+              this.setState({ visible: false });
               this.props.navigation.goBack();
             }}>
             <ModalContent
@@ -148,7 +150,7 @@ class SuggestionsScreen extends React.Component {
             }
             modalTitle={<ModalTitle title="More Suggestions" hasTitleBar />}
             onTouchOutside={() => {
-              this.setState({visible: false});
+              this.setState({ visible: false });
               this.props.navigation.goBack();
             }}>
             <ModalContent
@@ -211,6 +213,25 @@ class ArticleDetailsView extends React.Component {
     });
   }
 
+  customShare = async () => {
+    const shareOptions = {
+      message : "Please check this out: ",
+      url: `http://www.newscout.in/news/article/${this.props.route.params.articleSlug}/?domain=newscout&&format=json`,
+    }
+    try {
+      const ShareResponse = await Share.open(shareOptions);
+      // console.log(JSON.stringify(ShareResponse))
+      if (ShareResponse.action === Share.sharedAction) {
+        alert("Post Shared")
+      } else if (ShareResponse.action === Share.dismissedAction) {
+        // dismissed
+        alert("Post cancelled")
+      }
+    } catch (error) {
+      console.log('Error => ', error);
+    }
+  };
+
   render() {
     return (
       <Swiper
@@ -225,7 +246,7 @@ class ArticleDetailsView extends React.Component {
         }}>
         {this.state.data.length == 0 && (
           <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <ActivityIndicator
               animating
               size="large"
@@ -240,14 +261,14 @@ class ArticleDetailsView extends React.Component {
                 <View style={styles.slide1}>
                   <Image
                     style={componentStyles.imageStyle}
-                    source={{uri: item.cover_image}}
+                    source={{ uri: item.cover_image }}
                   />
-                  <View style={{flex: 1.5}}>
+                  <View style={{ flex: 1.5 }}>
                     <Text numberOfLines={2} style={componentStyles.titleStyle}>
                       {item.title}
                     </Text>
-                    <View style={{flex: 0.25, flexDirection: 'row'}}>
-                      <Text style={{flex: 1, marginLeft: 10, fontSize: 13}}>
+                    <View style={{ flex: 0.25, flexDirection: 'row' }}>
+                      <Text style={{ flex: 1, marginLeft: 10, fontSize: 13 }}>
                         <TimeAgo time={item.published_on} />
                       </Text>
                       <Text style={styles.source}>{item.source}</Text>
@@ -305,6 +326,7 @@ class ArticleDetailsView extends React.Component {
                       size={21}
                       color={Colors.iconColor}
                       style={componentStyles.bottomBarIconStyle}
+                      onPress={this.customShare}
                     />
                   </View>
                 </View>
@@ -318,14 +340,14 @@ class ArticleDetailsView extends React.Component {
 
 const Stack = createStackNavigator();
 
-function ArticleDetailsScreen({route, navigation}) {
+function ArticleDetailsScreen({ route, navigation }) {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="ArticleDetailsView">
         <Stack.Screen
           name="ArticleDetailsView"
           component={ArticleDetailsView}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
           initialParams={{
             articleID: route.params.articleID,
             articleSlug: route.params.articleSlug,
@@ -335,7 +357,7 @@ function ArticleDetailsScreen({route, navigation}) {
         <Stack.Screen
           name="Suggestions"
           component={SuggestionsScreen}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
