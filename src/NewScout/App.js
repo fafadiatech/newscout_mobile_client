@@ -81,8 +81,8 @@ function AllScreens({ route, navigation }) {
     <NavigationContainer independent={true}>
       <MainStack.Navigator>
         <MainStack.Screen name="AllTabs" component={AllTabs} initialParams={{ selectedTabName: selectedTabName }} />
-        <MainStack.Screen name="Articles List" component={ArticleListScreen} />
-        <MainStack.Screen name="Article Details" component={ArticleDetailsScreen} />
+        <MainStack.Screen name="Articles List" component={ArticleListScreen}  options={{ headerShown: true, title: 'Back' }} />
+        <MainStack.Screen name="Article Details" component={ArticleDetailsScreen} options={{ headerShown: true, title: 'Back' }}/>
       </MainStack.Navigator>
     </NavigationContainer>
   );
