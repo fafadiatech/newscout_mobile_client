@@ -8,6 +8,7 @@ import {
 
 import styles from '../styles/Base';
 import IconListViewItem from '../components/IconListViewItem';
+import Search from '../components/Search';
 
 
 class SearchScreen extends React.Component {
@@ -43,6 +44,7 @@ class SearchScreen extends React.Component {
               showsVerticalScrollIndicator={false}
               style={styles.flexible}
           >
+          <Search/>
             <Text
               style={styles.screenHeading}>
               Settings
