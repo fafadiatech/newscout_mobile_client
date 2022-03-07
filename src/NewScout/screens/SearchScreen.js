@@ -6,7 +6,7 @@ import { SearchBar } from 'react-native-elements';
 import LeftImageAlignedItem from '../components/LeftImageAlignedItem';
 import RightImageAlignedItem from '../components/RightImageAlignedItem';
 
-export class SearchScreen extends React.Component {
+class SearchScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
