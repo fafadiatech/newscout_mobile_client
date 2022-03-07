@@ -8,10 +8,10 @@ import {
 
 import styles from '../styles/Base';
 import IconListViewItem from '../components/IconListViewItem';
-import Search from '../components/Search';
 
 
-class SearchScreen extends React.Component {
+
+class SettingsScreen extends React.Component {
     constructor(props) {
       super(props);
       this.state = {dataSource: {}};
@@ -67,4 +67,4 @@ class SearchScreen extends React.Component {
     }
   }
 
-export default SearchScreen;
+export default SettingsScreen;
