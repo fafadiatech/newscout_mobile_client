@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   SafeAreaView,
-  Text,
+  Text, Image,
 } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -103,19 +103,23 @@ function ScreensWithHeader({route, navigation}) {
         options={{
           title: 'NewScout',
           headerStyle: {
-            backgroundColor: Colors.basePrimaryColor,
+            backgroundColor: Colors.baseBackgroundPrimaryColor,
           },
           headerLeft: () => {
             return(
               <Icon
                 name={'bars'}
                 size={25}
-                color={'white'}
+                color={'red'}
                 style={{marginLeft: 13}}
                 onPress={() => {navigation.openDrawer()}}
               />
             )
           },
+          headerTitle: () => (
+            <Image style={{ width: 130, height: 48 }} source={require("./assets/Images/logo.png")} />
+          ),
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontWeight: 'bold',
             fontSize: 20,
