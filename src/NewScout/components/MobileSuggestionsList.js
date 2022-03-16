@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {View, Image, Text} from 'react-native';
-
-import * as Colors from '../styles/Colors';
+import {View, FlatList} from 'react-native';
 
 import LeftImageAlignedSuggestionItem from './LeftImageAlignedSuggestionItem';
 import RightImageAlignedSuggestionItem from './RightImageAlignedSuggestionItem';
@@ -10,32 +8,55 @@ import Separator from './Separator';
 class MobileSuggestionsList extends React.Component {
     render(){
         return(
-                <View style={{flex: 1}}>
-                    <LeftImageAlignedSuggestionItem
-                        coverImage={this.props.data[0].coverImage}
-                        title={this.props.data[0].title}
-                        source={this.props.data[0].source}
-                    />
-                    <Separator />
-                    <RightImageAlignedSuggestionItem
-                        coverImage={this.props.data[1].coverImage}
-                        title={this.props.data[1].title}
-                        source={this.props.data[1].source}
-                    />
-                    <Separator />
-                    <LeftImageAlignedSuggestionItem
-                        coverImage={this.props.data[2].coverImage}
-                        title={this.props.data[2].title}
-                        source={this.props.data[2].source}
-                    />
-                    <Separator />
-                    <RightImageAlignedSuggestionItem
-                        coverImage={this.props.data[3].coverImage}
-                        title={this.props.data[3].title}
-                        source={this.props.data[3].source}
-                    />
-                    <Separator />
-            </View>
+            <View style={{ flex: 1 }} >
+            <FlatList
+                data={this.props.data.slice(0, 4)}
+                renderItem={({ item, index }) => {
+                    if (index % 2 == 0) {
+                        return (
+                            <View>
+                                <LeftImageAlignedSuggestionItem
+                                    coverImage={item.cover_image}
+                                    title={item.title}
+                                    source={item.source}
+                                    ts={item.published_on}
+                                    onPressHandler={() => {
+                                        this.props.navigation.push('Article Details', 
+                                        {
+                                            articleID: item.id,
+                                            articleSlug: item.slug,
+                                        }
+                                        );
+                                    }}
+                                />
+                                <Separator />
+                            </View>
+                        );
+                    } else {
+                        return (
+                            <View>
+                                <RightImageAlignedSuggestionItem
+                                    coverImage={item.cover_image}
+                                    title={item.title}
+                                    source={item.source}
+                                    ts={item.published_on}
+                                    onPressHandler={() => {
+                                        this.props.navigation.push('Article Details', 
+                                        {
+                                            articleID: item.id,
+                                            articleSlug: item.slug,
+                                        }
+                                        );
+                                    }}
+                                />
+                                <Separator />
+                            </View>
+                        );
+                    }
+                }}
+                keyExtractor={(item, index) => index.toString()}
+            />
+        </View>
         );
     }
 }
