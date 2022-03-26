@@ -35,6 +35,8 @@ class ArticleListScreen extends React.Component {
       selectedOption: selectedOption,
       refreshing: false,
       loading: false,
+      slugs: [],
+      firstSlug: '',
     };
     this.fetchMenu(selectedOption);
     this.scrollView = React.createRef();
@@ -53,12 +55,22 @@ class ArticleListScreen extends React.Component {
       .then((json) => {
         var newDataset = this.state.articles;
         newDataset.push(...json.body.results);
+        var articleSlugs = [];
+        json.body.results.forEach(function(item){
+          articleSlugs.push({text: item.slug});
+        });
+
         this.setState({
           articles: newDataset,
           refreshing: false,
           loading: false,
           page: page,
+          slugs: articleSlugs,
+          firstSlug: articleSlugs[0].text,
         });
+        // console.log(this.state.slugs.length);
+        // console.log(this.state.firstSlug);
+        
       })
       .catch((error) => {
         console.error(error);
@@ -97,6 +109,27 @@ class ArticleListScreen extends React.Component {
         });
       });
   };
+
+
+//    // get a random item from an array
+
+//    getRandomItem = (arr) => {
+
+//     // get random index value
+//     const randomIndex = Math.floor(Math.random() * arr.length);
+
+//     // get random item
+//     const item = arr[randomIndex];
+
+//     return item;
+// }
+
+//   getArticleSlug = () => {
+//     let array = this.state.slugs;
+//     const result = this.getRandomItem(array);
+//     console.log(result);
+
+//   }
 
   scrollToTop = () => {
     this.scrollView.scrollTo({y: 0});
@@ -248,6 +281,7 @@ class ArticleListScreen extends React.Component {
                       this.props.navigation.push('Article Details', {
                         articleID: item.id,
                         articleSlug: item.slug,
+                        nextArticleSlug: this.state.slugs,
                       });
                     }}
                   />
@@ -263,6 +297,7 @@ class ArticleListScreen extends React.Component {
                       this.props.navigation.push('Article Details', {
                         articleID: item.id,
                         articleSlug: item.slug,
+                        nextArticleSlug: this.state.slugs,
                       });
                     }}
                   />

@@ -163,6 +163,7 @@ class ArticleDetailsView extends React.Component {
       .then((json) => {
         this.setState({
           data: [json.body.article],
+          nextArticle: [json.body.next_article],
           loading: false,
         });
       })
@@ -187,6 +188,28 @@ class ArticleDetailsView extends React.Component {
       ],
     });
   }
+  getNextArticle = () => {
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        this.callAPI(this.state.nextArticle);
+      },
+    );
+  };
+
+// getRandomSlug = () => {
+//   this.setState(
+//     {
+//       loading: true,
+//     },
+//     () => {
+//       this.callAPI(this.props.route.params.nextArticleSlug);
+//     },
+//   );
+//   console.log(this.props.route.params.nextArticleSlug);
+// };
 
   customShare = async () => {
     const shareOptions = {
@@ -267,6 +290,7 @@ class ArticleDetailsView extends React.Component {
                       size={21}
                       color={Colors.iconColor}
                       style={componentStyles.bottomBarIconStyle}
+                      onPress={this.getNextArticle}
                     />
                     <Icon
                       name={'comment'}
