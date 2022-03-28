@@ -8,6 +8,8 @@ import {
   Platform,
   RefreshControl,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {FloatingAction} from 'react-native-floating-action';
 
 import styles from '../styles/Base';
 import * as Colors from '../styles/Colors';
@@ -62,6 +64,10 @@ class TrendingScreen extends React.Component {
     );
   };
 
+  scrollToTop = () => {
+    this.scrollView.scrollTo({y: 0});
+  };
+
   render() {
     var cardColumns = 0;
     if (Platform.isPad == true) {
@@ -108,6 +114,14 @@ class TrendingScreen extends React.Component {
             }
           />
         </ScrollView>
+        <FloatingAction
+          color={Colors.basePrimaryColor}
+          floatingIcon={
+            <Icon name={'arrow-up'} size={25} color={Colors.iconColor} />
+          }
+          showBackground={false}
+          onPressMain={this.scrollToTop}
+        />
       </View>
     );
   }
