@@ -291,6 +291,7 @@ class ArticleDetailsView extends React.Component {
                       size={21}
                       color={Colors.iconColor}
                       style={componentStyles.bottomBarIconStyle}
+                      onPress={() => this.callAPI(this.props.route.params.articleSlug)}
                     />
                     <Icon
                       name={'share-alt'}
