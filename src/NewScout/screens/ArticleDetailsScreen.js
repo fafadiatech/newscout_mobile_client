@@ -49,60 +49,35 @@ class SuggestionsScreen extends React.Component {
       numOfRows: 4,
       visible: true,
       items: ['Test 1', 'Test 2', 'Test 3'],
-      data: [
-        {
-          coverImage: 'https://picsum.photos/200/200',
-          title:
-            'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
-          source: 'financialexpress.com',
-        },
-        {
-          coverImage: 'https://picsum.photos/200/200',
-          title:
-            'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
-          source: 'financialexpress.com',
-        },
-        {
-          coverImage: 'https://picsum.photos/200/200',
-          title:
-            'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
-          source: 'financialexpress.com',
-        },
-        {
-          coverImage: 'https://picsum.photos/200/200',
-          title:
-            'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
-          source: 'financialexpress.com',
-        },
-        {
-          coverImage: 'https://picsum.photos/200/200',
-          title:
-            'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
-          source: 'financialexpress.com',
-        },
-        {
-          coverImage: 'https://picsum.photos/200/200',
-          title:
-            'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
-          source: 'financialexpress.com',
-        },
-        {
-          coverImage: 'https://picsum.photos/200/200',
-          title:
-            'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
-          source: 'financialexpress.com',
-        },
-        {
-          coverImage: 'https://picsum.photos/200/200',
-          title:
-            'Occaecat occaecat ullamco velit velit id dolor cupidatat pariatur deserunt fugiat.',
-          source: 'financialexpress.com',
-        },
-      ],
+      data: [],
       loading: false,
     };
     this.checkiPad();
+    this.recommendation(this.props.route.params.articleID);
   }
+
+
+  recommendation = (articleID) => {
+    this.setState({
+      loading: true,
+    });
+    return fetch(
+      `http://www.newscout.in/api/v1/articles/${articleID}/recommendations/?domain=newscout&format=json`,
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({
+          data: json.body.results,
+          loading: false,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({
+          loading: false,
+        });
+      });
+  };
 
   adaptToOrientationChange = () => {
     this.checkiPad();
@@ -130,7 +105,7 @@ class SuggestionsScreen extends React.Component {
               style={{
                 flex: 1,
               }}>
-              <MobileSuggestionsList data={this.state.data} />
+              <MobileSuggestionsList data={this.state.data} navigation={this.props.navigation}/>
             </ModalContent>
           </Modal.BottomModal>
         </View>
@@ -352,6 +327,13 @@ function ArticleDetailsScreen({route, navigation}) {
           name="Suggestions"
           component={SuggestionsScreen}
           options={{headerShown: false}}
+          initialParams={{
+            articleID: route.params.articleID,
+            articleSlug: route.params.articleSlug,
+          }}
+        />
+         <Stack.Screen name="Article Details" 
+         component={ArticleDetailsScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>
