@@ -116,6 +116,17 @@ function ScreensWithHeader({route, navigation}) {
               />
             )
           },
+          headerRight : () => {
+            return (
+              <Icon
+                name={'gear'}
+                size={25}
+                color={'red'}
+                style={{ marginRight: 13 }}
+                onPress={() => navigation.navigate('Search')}
+              />
+            )
+          },
           headerTitle: () => (
             <Image style={{ width: 130, height: 48 }} source={require("./assets/Images/logo.png")} />
           ),
