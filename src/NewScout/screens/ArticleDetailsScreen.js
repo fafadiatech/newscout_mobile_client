@@ -13,6 +13,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {WebView} from 'react-native-webview';
 import TimeAgo from 'react-native-timeago';
 import Swiper from 'react-native-swiper';
+import Share from 'react-native-share';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -173,6 +174,7 @@ class ArticleDetailsView extends React.Component {
       loading: false,
     };
     this.callAPI(this.props.route.params.articleSlug);
+    // this.customShare(this.props.route.params.articleSlug);
   }
 
   callAPI = (articleSlug) => {
@@ -210,6 +212,19 @@ class ArticleDetailsView extends React.Component {
       ],
     });
   }
+
+  customShare = async () => {
+    const shareOptions = {
+      message : "Please check this out: ",
+      url: `http://www.newscout.in/news/article/${this.props.route.params.articleSlug}/?domain=newscout&&format=json`,
+    }
+    try {
+      const ShareResponse = await Share.open(shareOptions);
+    } 
+    catch (error) {
+      console.log('Error => ', error);
+    }
+  };
 
   render() {
     return (
@@ -305,6 +320,7 @@ class ArticleDetailsView extends React.Component {
                       size={21}
                       color={Colors.iconColor}
                       style={componentStyles.bottomBarIconStyle}
+                      onPress={this.customShare}
                     />
                   </View>
                 </View>
