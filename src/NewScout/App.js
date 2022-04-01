@@ -18,7 +18,7 @@ import CategoriesScreen from './screens/CategoriesScreen';
 import SearchScreen from './screens/SearchScreen';
 import ArticleListScreen from './screens/ArticleListScreen';
 import ArticleDetailsScreen from './screens/ArticleDetailsScreen';
-
+import VideosScreen from './screens/VideosScreen';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -49,6 +49,8 @@ function AllTabs({route, navigation}) {
                 iconName = focused ? 'columns' : 'columns';
               } else if (route.name === 'Search') {
                 iconName = focused ? 'search' : 'search';
+              } else if (route.name === 'Videos') {
+                iconName = focused ? 'youtube-play' : 'youtube-play';
               }
 
               // You can return any component that you like here!
@@ -63,6 +65,7 @@ function AllTabs({route, navigation}) {
           <Tab.Screen name="For You" component={ForYouScreen} />
           <Tab.Screen name="Categories" component={CategoriesScreen} />
           <Tab.Screen name="Search" component={SearchScreen} />
+          <Tab.Screen name="Videos" component={VideosScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>
