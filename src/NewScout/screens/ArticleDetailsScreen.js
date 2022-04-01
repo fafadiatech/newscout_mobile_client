@@ -163,6 +163,7 @@ class ArticleDetailsView extends React.Component {
       .then((json) => {
         this.setState({
           data: [json.body.article],
+          nextArticle: [json.body.next_article],
           loading: false,
         });
       })
@@ -267,6 +268,7 @@ class ArticleDetailsView extends React.Component {
                       size={21}
                       color={Colors.iconColor}
                       style={componentStyles.bottomBarIconStyle}
+                      onPress={() => this.callAPI(this.state.nextArticle)}
                     />
                     <Icon
                       name={'comment'}
